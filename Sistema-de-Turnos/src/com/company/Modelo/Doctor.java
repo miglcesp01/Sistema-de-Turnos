@@ -4,7 +4,7 @@ public class Doctor extends Persona {
 
     private String especialidad;
     private boolean disponibilidad;
-    private Paciente paciente;
+    //private Paciente paciente;
 
     public Doctor(String especialidad,boolean disponibilidad){
         this.especialidad=especialidad;
@@ -15,7 +15,7 @@ public class Doctor extends Persona {
         return  especialidad;
     }
 
-    public void setEspecialidad(){
+    public void setEspecialidad(String especialidad){
         this.especialidad=especialidad;
     }
 
