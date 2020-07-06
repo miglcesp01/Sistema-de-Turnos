@@ -5,6 +5,7 @@
  */
 package com.company.Main;
 
+import com.company.Interface.VentanaInicio;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -16,15 +17,14 @@ import javafx.stage.Stage;
  * @author Alexis
  */
 public class SistemaDeTurnos extends Application{
-    
+    public static Stage primaryStage;
     @Override
     public void start(Stage arg0) throws Exception {
-        Pane root=new Pane();
-        root.getChildren().add(new Label("hola mundo"));
-        Scene sc = new Scene(root,730,550);
-        arg0.setTitle("prueba");
-        arg0.setScene(sc);
-        arg0.show();
+        primaryStage=arg0;
+        Scene sc = new Scene(new VentanaInicio().getRoot(),730,550);
+        primaryStage.setTitle("prueba");
+        primaryStage.setScene(sc);
+        primaryStage.show();
     }
     /**
      * @param args the command line arguments
