@@ -5,9 +5,7 @@
  */
 package com.company.Interface;
 
-import static com.company.Interface.VentanaVideos.mediaPlayer;
-import static com.company.Interface.VentanaVideos.mediaView;
-import static com.company.Interface.VentanaVideos.v1;
+
 import java.io.File;
 import java.util.Iterator;
 import javafx.geometry.Pos;
@@ -31,19 +29,26 @@ public class VentanaInicio {
     private  static Media media;
     private static MediaView mediaView;
     private static VBox v1 = new VBox();
+    private static VBox root;
     //private CircularSimplyLinkedList<String> listaVideos = new CircularSimplyLinkedList<>();
     
-   //Atributos para la estructura de la ventana
-    Label tiempo = new Label("Tiempo");
-    Label horario = new Label("Horario Semana");
-    HBox h2 = new HBox();
-    VBox v2 = new VBox();
-    //listaVideos.addFirst("src/v1.mp4");
-    //listaVideos.addFirst("src/v2.mp4");
-    //v2.getChildren().add(tiempo);
-    //v2.setAlignment(Pos.TOP_RIGHT);
-    VBox root = new VBox(h2,horario);
-    //root.setAlignment(Pos.CENTER);
+    public VentanaInicio(){
+        //Atributos para la estructura de la ventana
+        root = new VBox();
+        Label tiempo = new Label("Tiempo");
+        Label horario = new Label("Horario Semana");    
+        HBox h2 = new HBox();
+        VBox v2 = new VBox();
+        //listaVideos.addFirst("src/v1.mp4");
+        //listaVideos.addFirst("src/v2.mp4");
+        v2.getChildren().add(tiempo);
+        //v2.setAlignment(Pos.TOP_RIGHT);
+        root.getChildren().addAll(horario,tiempo);
+        //root.setAlignment(Pos.CENTER);
+    }
+    
+    
+   
     
     /*private MediaView createMediaView(CircularSimplyLinkedList urls){
         mediaView = new MediaView();
