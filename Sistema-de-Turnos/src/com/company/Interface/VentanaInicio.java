@@ -11,6 +11,7 @@ import static com.company.Interface.VentanaVideos.v1;
 import java.io.File;
 import java.util.Iterator;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -70,6 +71,10 @@ public class VentanaInicio {
         mediaView.setMediaPlayer(mediaPlayer);
     } 
     }*/
+
+    public Parent getRoot() {
+        return root;
+    }
     
     
     
