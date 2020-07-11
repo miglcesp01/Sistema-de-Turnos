@@ -1,14 +1,18 @@
 package com.company.Modelo;
 
+import java.util.Objects;
+
 public class Doctor extends Persona {
 
+    private String identificacion;
     private String especialidad;
     private boolean disponibilidad;
     //private Paciente paciente;
 
-    public Doctor(String especialidad,boolean disponibilidad){
+    public Doctor(String especialidad,String identificacion){
         this.especialidad=especialidad;
-        this.disponibilidad=disponibilidad;
+        this.disponibilidad=true;
+        this.identificacion=identificacion;
     }
 
     public String getEspecialidad(){
@@ -30,4 +34,27 @@ public class Doctor extends Persona {
     public boolean atenderPaciente(Paciente paciente){
         return false;
     }
+    
+    public String getIdentificacion(){
+        return identificacion;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Doctor other = (Doctor) obj;
+        if (!Objects.equals(this.identificacion, other.identificacion)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

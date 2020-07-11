@@ -5,6 +5,7 @@
  */
 package com.company.Interface;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 /**
@@ -12,13 +13,17 @@ import javafx.scene.layout.Pane;
  * @author Alexis
  */
 public class VentanaInicio {
-    private Pane root;
+    private BorderPane root;
     
-    
-    
-    public Pane getRoot(){
-        return root;
+    public VentanaInicio(){
+        root=new BorderPane();
     }
     
     
+    
+    public BorderPane getRoot(){
+        return root;
+    }
+    
+   
 }

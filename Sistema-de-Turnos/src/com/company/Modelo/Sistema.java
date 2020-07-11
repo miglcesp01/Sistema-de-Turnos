@@ -34,8 +34,11 @@ public class Sistema {
     }
 
     public boolean agregarDoctor(Doctor doctor){
-        return false;
+        if(doctores.contains(doctor) || doctor==null) return false;
+        doctores.add(doctor);
+        return true;
     }
+    
     public boolean generarPuesto(){
         return false;
     }

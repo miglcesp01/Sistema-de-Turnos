@@ -4,12 +4,14 @@ public class Paciente extends Persona {
     private int edad;
     private char genero;
     private Sintoma sintoma;
+    private int turno;
 
 
     public Paciente(int edad,char genero,Sintoma sintoma){
         this.edad=edad;
         this.genero=genero;
         this.sintoma=sintoma;
+        turno=0;
     }
 
     public int getEdad(){
@@ -30,6 +32,12 @@ public class Paciente extends Persona {
     public void setSintoma(Sintoma sintoma){
         this.sintoma=sintoma;
     }
-
-
+    
+    public void setTurno(int turno){
+        this.turno=turno;
+    }
+    
+    public int getTurno(){
+        return this.turno;
+    }
 }
