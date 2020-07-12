@@ -9,10 +9,16 @@ import com.company.Main.SistemaDeTurnos;
 import com.company.Modelo.Sistema;
 import java.time.LocalDateTime;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import recursos.archivos.CircularSimplyLinkedList;
 
 /**
  *
@@ -20,12 +26,12 @@ import javafx.scene.layout.Pane;
  */
 public class VentanaInicio {
     private BorderPane root;
-
+    
     public VentanaInicio() {
         root = new BorderPane();
         crearTop();
     }
-
+    
     public BorderPane getRoot() {
         return root;
     }
@@ -34,7 +40,7 @@ public class VentanaInicio {
         Label reloj = new Label("");
         Thread cl = new Thread(new Time(reloj));
         cl.start();
-        root.setTop(reloj);
+        root.getChildren().add(reloj);
     }
 
     private class Time implements Runnable {
