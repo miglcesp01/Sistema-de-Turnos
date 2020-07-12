@@ -5,6 +5,7 @@ public class Paciente extends Persona {
     private char genero;
     private Sintoma sintoma;
     private int turno;
+    private String receta;
 
 
     public Paciente(int edad,char genero,Sintoma sintoma){
@@ -12,6 +13,7 @@ public class Paciente extends Persona {
         this.genero=genero;
         this.sintoma=sintoma;
         turno=0;
+        receta=null;
     }
 
     public int getEdad(){
@@ -39,5 +41,13 @@ public class Paciente extends Persona {
     
     public int getTurno(){
         return this.turno;
+    }
+    
+    public void setReceta(String receta){
+        this.receta=receta;
+    }
+    
+    public String getReceta(){
+        return receta;
     }
 }

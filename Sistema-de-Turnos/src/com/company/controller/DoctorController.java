@@ -35,8 +35,11 @@ public class DoctorController {
         Label diag=new Label("Según mi experiencia, podría ser:");
         TextField txDiag=new TextField();
         Label rec=new Label("\n Le voy a recetar:");
-        TextField txRec=new TextField();
-        
+        TextField txRec=new TextField();      
+        Button ok=new Button("ok");
+        ok.setOnMouseClicked(e->{generarReceta(txRec.getText());});
+        pac.setReceta(txRec.getText());
+        root.getChildren().addAll(pre,sint,diag,txDiag,rec,txRec);
         return root;
     }
     

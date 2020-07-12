@@ -16,16 +16,25 @@ import javafx.stage.Stage;
  *
  * @author Alexis
  */
-public class SistemaDeTurnos extends Application{
+public class SistemaDeTurnos extends Application {
+
     public static Stage primaryStage;
+    public static boolean detener = false;
+
     @Override
     public void start(Stage arg0) throws Exception {
-        primaryStage=arg0;
-        Scene sc = new Scene(new VentanaInicio().getRoot(),730,550);
+        primaryStage = arg0;
+        Scene sc = new Scene(new VentanaInicio().getRoot(), 730, 550);
         primaryStage.setTitle("prueba");
         primaryStage.setScene(sc);
         primaryStage.show();
     }
+
+    @Override
+    public void stop() {
+        detener = true;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -33,5 +42,4 @@ public class SistemaDeTurnos extends Application{
         launch(args);
     }
 
-    
 }
