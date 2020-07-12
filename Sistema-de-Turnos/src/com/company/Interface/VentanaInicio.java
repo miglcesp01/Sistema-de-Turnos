@@ -8,19 +8,17 @@ package com.company.Interface;
 import com.company.Main.SistemaDeTurnos;
 import com.company.Modelo.Sistema;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.util.converter.LocalDateTimeStringConverter;
 
 /**
  *
  * @author Alexis
  */
 public class VentanaInicio {
-
     private BorderPane root;
 
     public VentanaInicio() {
