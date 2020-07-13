@@ -21,6 +21,7 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import recursos.archivos.CircularSimplyLinkedList;
+import recursos.archivos.LecturaArchivos;
 
 /**
  * 
@@ -32,17 +33,13 @@ public class pruebaVideos extends Application {
     public static MediaPlayer mediaPlayer;
     public static MediaView mediaView;
     public static VBox v1;
-    private CircularSimplyLinkedList<String> listaVideos = new CircularSimplyLinkedList<>();
+    private CircularSimplyLinkedList<String> listaVideos;
     
     public void start(Stage primaryStage) {
         HBox h2 = new HBox();
         v1 = new VBox();
         VBox v2 = new VBox();
-        listaVideos.addFirst("src/recursos/videos/CantFeelMyFace.mp4");
-        listaVideos.addFirst("src/recursos/videos/Cheerleader.mp4");
-        listaVideos.addFirst("src/recursos/videos/LetHerGo.mp4");
-        listaVideos.addFirst("src/recursos/videos/LockedOut.mp4");
-        listaVideos.addFirst("src/recursos/videos/Rude.mp4");
+        listaVideos=LecturaArchivos.leerArchivoVideos();
         
         Label tiempo = new Label("Tiempo");
         Label horario = new Label("Horario atencion");
@@ -110,7 +107,7 @@ public class pruebaVideos extends Application {
     
     private void initMediaPlayer(MediaView media,Iterator<String> iterador){
         if (iterador.hasNext()){
-        mediaPlayer = new MediaPlayer(new Media(new File(iterador.next()).toURI().toString()));
+        mediaPlayer = new MediaPlayer(new Media(new File(("src/recursos/videos/"+iterador.next())).toURI().toString()));
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.setOnEndOfMedia(() -> {
             initMediaPlayer(mediaView, iterador);

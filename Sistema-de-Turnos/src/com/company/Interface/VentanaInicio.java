@@ -19,7 +19,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import recursos.archivos.CircularSimplyLinkedList;
-
+import com.company.Interface.Video;
 /**
  *
  * @author Alexis
@@ -29,18 +29,36 @@ public class VentanaInicio {
     
     public VentanaInicio() {
         root = new BorderPane();
-        crearTop();
+        crearRigth();
+        crearLeft();
+        crearBajo();
+        
+        
     }
     
     public BorderPane getRoot() {
         return root;
     }
 
-    private void crearTop() {
+    private void crearRigth() {
         Label reloj = new Label("");
         Thread cl = new Thread(new Time(reloj));
         cl.start();
-        root.getChildren().add(reloj);
+        VBox cont=new VBox();
+        cont.getChildren().addAll(reloj);
+        root.setRight(cont);
+    }
+    
+    private void crearLeft(){
+        VBox cont=new VBox();
+        Label lo=new Label("Logo");
+        cont.getChildren().addAll(lo,(new Video().getVideo()));
+        root.setLeft(cont);
+    }
+    
+    private void crearBajo(){
+        Label atencion=new Label("Horario de Atención de Lunes a Viernes de 10 a 18 hs/ Sabado");
+        root.setBottom(atencion);
     }
 
     private class Time implements Runnable {

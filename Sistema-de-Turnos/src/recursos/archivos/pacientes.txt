@@ -1,0 +1,5 @@
+Eddo,22,M,covid19,0
+Juan,49,M,congestión nasal,3
+Alex,29,M,resfrio,3
+Valeria,49,F,dengue,1
+Eduardo,38,dolor Cabeza,2

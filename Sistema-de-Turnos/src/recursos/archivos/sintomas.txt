@@ -1,0 +1,11 @@
+covid19|0
+vomito|1
+fiebre|0
+resfrio|3
+congestión nasal|3
+dengue|1
+diarrea|2
+quemadura 3er grado|0
+quemadura 2er grado|2
+quemadura 1er grado|3
+dolor Cabeza|2

@@ -5,6 +5,9 @@
  */
 package recursos.archivos;
 
+import com.company.Modelo.Doctor;
+import com.company.Modelo.Paciente;
+import com.company.Modelo.Sintoma;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,7 +24,7 @@ public class LecturaArchivos {
     
     public static CircularSimplyLinkedList<String> leerArchivoVideos(){
         CircularSimplyLinkedList<String> videos=new CircularSimplyLinkedList<>();
-        try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/videos.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader("src/recursos/archivos/videos.txt"))){
             String linea;
             while((linea=bf.readLine())!=null){
                 videos.addLast(linea);
@@ -35,12 +38,13 @@ public class LecturaArchivos {
         return videos;
     }
     
-    public static List<String> leerArchivoSintomas(){
-        List<String> sintomas=new LinkedList<>();
+    public static List<Sintoma> leerArchivoSintomas(){
+        List<Sintoma> sintomas=new LinkedList<>();
         try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/sintomas.txt"))){
             String linea;
             while((linea=bf.readLine())!=null){
-                sintomas.add(linea);
+                String[] lista=linea.split("|");
+                sintomas.add(new Sintoma(lista[0],Integer.parseInt(lista[1])));
             }
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
@@ -51,5 +55,34 @@ public class LecturaArchivos {
         return sintomas;
     }
     
+    public static List<Doctor> leerArchivoDoctor(){
+        List<Doctor> doctores=new LinkedList<>();
+        try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/doctores.txt"))){
+            String linea;
+            while((linea=bf.readLine())!=null){
+                String[] lista=linea.split(",");
+                doctores.add(new Doctor(lista[0],lista[1],lista[2]));
+            }
+        }catch(FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }return doctores;
+    }
+    
+    public static List<Paciente> leerArchivoPaciente(){
+        List<Paciente> pacientes=new LinkedList<>();
+        try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/pacientes.txt"))){
+            String linea;
+            while((linea=bf.readLine())!=null){
+                String[] lista=linea.split(",");
+                pacientes.add(new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),new Sintoma(lista[3],Integer.parseInt(lista[4]))));
+            }
+        }catch(FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }return pacientes;
+    }
     
 }

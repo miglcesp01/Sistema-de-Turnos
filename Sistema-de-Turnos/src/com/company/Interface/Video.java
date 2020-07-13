@@ -15,37 +15,28 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import recursos.archivos.CircularSimplyLinkedList;
+import recursos.archivos.LecturaArchivos;
 
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Video {
-    private static Media media;
-    private static MediaPlayer mediaPlayer;
-    private static MediaView mediaView;
-    private CircularSimplyLinkedList<String> listaVideos = new CircularSimplyLinkedList<>();
-    private VBox root;
+    private Media media;
+    private MediaPlayer mediaPlayer;
+    private MediaView mediaView;
     
     public Video(){
-        
-        root = new VBox();
-        listaVideos.addFirst("src/recursos/videos/CantFeelMyFace.mp4");
-        listaVideos.addFirst("src/recursos/videos/Cheerleader.mp4");
-        listaVideos.addFirst("src/recursos/videos/LetHerGo.mp4");
-        listaVideos.addFirst("src/recursos/videos/LockedOut.mp4");
-        listaVideos.addFirst("src/recursos/videos/Rude.mp4");
-        root.getChildren().add(createMediaView(listaVideos));
-        
+        createMediaView(LecturaArchivos.leerArchivoVideos());   
     }
     
-    public VBox getRootVideo(){
-        return this.root;
+    public MediaView getVideo(){
+        return mediaView;
     }
     
     private void initMediaPlayer(MediaView media,Iterator<String> iterador){
         if (iterador.hasNext()){
-        mediaPlayer = new MediaPlayer(new Media(new File(iterador.next()).toURI().toString()));
+        mediaPlayer = new MediaPlayer(new Media(new File(("src/recursos/videos/"+iterador.next())).toURI().toString()));
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.setOnEndOfMedia(() -> {
             initMediaPlayer(mediaView, iterador);

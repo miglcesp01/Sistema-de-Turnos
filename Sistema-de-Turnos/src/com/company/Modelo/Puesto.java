@@ -5,13 +5,13 @@ public class Puesto {
     private Doctor doctor;
     private String turno;
     private int numero;
+    private boolean disponibilidad;
 
-
-    public Puesto(Paciente paciente,Doctor doctor,String turno,int numero){
-        this.paciente=paciente;
+    public Puesto(Doctor doctor,String turno,int numero){
         this.doctor=doctor;
         this.turno=turno;
         this.numero=numero;
+        disponibilidad=true;
     }
     public Paciente getPaciente(){
         return paciente;
@@ -24,6 +24,18 @@ public class Puesto {
     }
     public int getNumero(){
         return numero;
+    }
+    
+    public void setPaciente(Paciente paciente){
+        this.paciente=paciente;
+    }
+    
+    public void setDisponibilidad(boolean dis){
+        this.disponibilidad=dis;
+    }
+    
+    public boolean getDisponibilida(){
+        return disponibilidad;
     }
 
 }

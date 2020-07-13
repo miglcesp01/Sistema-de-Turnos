@@ -1,17 +1,21 @@
 package com.company.Modelo;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import recursos.archivos.LecturaArchivos;
 
 public class Sistema {
     private List<Doctor> doctores;
     private PriorityQueue<Paciente> pacientes;
     private List<Puesto> puestos;
+    private List<Sintoma> sintomas;
 
-    public Sistema(List<Doctor> doctores, PriorityQueue<Paciente> pacientes, List<Puesto> puestos) {
-        this.doctores = doctores;
-        this.pacientes = pacientes;
-        this.puestos = puestos;
+    public Sistema() {
+        this.doctores = LecturaArchivos.leerArchivoDoctor();
+        this.pacientes = new PriorityQueue<>();
+        pacientes.addAll(LecturaArchivos.leerArchivoPaciente());
+        this.puestos = new LinkedList<>();
     }
 
     public List<Doctor> getDoctores() {
@@ -42,11 +46,9 @@ public class Sistema {
     public boolean generarPuesto(){
         return false;
     }
-    public boolean eliminarPuesto(){
+    public boolean eliminarPuesto(Puesto p){
+        if(p!=null || puestos.contains(p)) puestos.remove(p);
         return false;
-    }
-    public void cargarDatos(){
-
     }
 
 }

@@ -1,6 +1,6 @@
 package com.company.Modelo;
 
-public class Paciente extends Persona {
+public class Paciente extends Persona{
     private int edad;
     private char genero;
     private Sintoma sintoma;
@@ -8,7 +8,8 @@ public class Paciente extends Persona {
     private String receta;
 
 
-    public Paciente(int edad,char genero,Sintoma sintoma){
+    public Paciente(String nombre, int edad,char genero,Sintoma sintoma){
+        super(nombre);
         this.edad=edad;
         this.genero=genero;
         this.sintoma=sintoma;
