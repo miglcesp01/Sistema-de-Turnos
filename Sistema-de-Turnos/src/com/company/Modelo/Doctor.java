@@ -55,4 +55,8 @@ public class Doctor extends Persona {
         return true;
     }
     
+    public String toString(){
+        return nombre;
+    }
+    
 }

@@ -50,8 +50,12 @@ public class Sistema {
         return true;
     }
     
-    public boolean generarPuesto(){
-        return false;
+    public boolean generarPuesto(Doctor doctor, int puesto){
+        puestos.add(new Puesto(doctor,puesto));
+        doctor.setDisponibilidad(false);
+        //Solo imprimo por pantalla para comprobar funcionamiento
+        System.out.println(puestos);
+        return true;
     }
     
     public void agregarPaciente(Paciente p){
@@ -70,6 +74,12 @@ public class Sistema {
     public Doctor buscarDoctorDisponible(){
         for(Doctor d: doctores){
             if(d.getDisponibilidad()) return d;
+        }return null;
+    }
+    
+    public Puesto buscarPuestoDisponible(){
+        for(Puesto p: puestos){
+            if(p.isDisponible()) return p;
         }return null;
     }
 }

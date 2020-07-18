@@ -20,6 +20,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import recursos.archivos.CircularSimplyLinkedList;
 import com.company.Interface.Video;
+import com.company.Modelo.Doctor;
 import com.company.controller.Formulario;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -62,10 +63,15 @@ public class VentanaInicio {
         VBox cont=new VBox();
         Button turno=new Button("Sacar un turno");
         Button addDoc=new Button("Ingresar nuevo Doctor");
-        cont.getChildren().addAll(turno,addDoc);
+        Button crearP = new Button("Crear Puesto");
+        cont.getChildren().addAll(turno,addDoc,crearP);
         cont.setSpacing(30);
         turno.setOnMouseClicked(e -> {Formulario.crearFormularioPaciente();});
         addDoc.setOnMouseClicked(e -> {Formulario.crearFormularioDoctor();});
+        crearP.setOnMouseClicked(e->{
+            Doctor doctor = Sistema.sistema.buscarDoctorDisponible();
+            if(doctor!=null)Sistema.sistema.generarPuesto(doctor, Sistema.sistema.getPuestos().size()+1);
+        });
         root.setLeft(cont);
         
     }

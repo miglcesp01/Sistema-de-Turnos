@@ -10,7 +10,7 @@ package com.company.Modelo;
  * @author Alexis
  */
 public abstract class Persona {
-    private String nombre;
+    protected String nombre;
     
     public Persona(String nombre){
         this.nombre=nombre;

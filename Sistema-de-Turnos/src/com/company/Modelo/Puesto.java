@@ -25,6 +25,7 @@ public class Puesto {
     
     public void setPaciente(Paciente paciente){
         this.paciente=paciente;
+        disponibilidad = false;
     }
     
     public void setDisponibilidad(boolean dis){
@@ -51,6 +52,15 @@ public class Puesto {
             return false;
         }
         return true;
+    }
+    
+    public boolean isDisponible(){
+        return disponibilidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Puesto{" + "paciente=" + paciente + ", doctor=" + doctor + ", numero=" + numero + ", disponibilidad=" + disponibilidad + '}';
     }
 
 }
