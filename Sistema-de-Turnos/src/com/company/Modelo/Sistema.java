@@ -1,5 +1,6 @@
 package com.company.Modelo;
 
+import com.company.Interface.VentanaInicio;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -11,14 +12,23 @@ public class Sistema {
     private PriorityQueue<Paciente> pacientes;
     private List<Puesto> puestos;
     private List<Sintoma> sintomas;
-    private int turnos=6;
+    private int turnos=1;
 
     private Sistema() {
         this.doctores = LecturaArchivos.leerArchivoDoctor();
-        this.pacientes = new PriorityQueue<>((Paciente p1,Paciente p2)-> p2.getSintoma().getPrioridad()-p1.getSintoma().getPrioridad());
+        this.pacientes = new PriorityQueue<>((Paciente p1,Paciente p2)-> p2.getSintoma().getPrioridad()-p1.getSintoma().getPrioridad());   
         pacientes.addAll(LecturaArchivos.leerArchivoPaciente());
         this.puestos = new LinkedList<>();
         this.sintomas=LecturaArchivos.leerArchivoSintomas();
+        asignarTurnosIniciales();
+    }
+    
+    private void asignarTurnosIniciales(){
+        for(Paciente p:pacientes){
+            p.setTurno(turnos++);
+        }
+        System.out.println(pacientes);
+        
     }
 
     public List<Doctor> getDoctores() {
@@ -54,7 +64,11 @@ public class Sistema {
         Puesto p = new Puesto(doctor,puesto);
         puestos.add(p);
         doctor.setDisponibilidad(false);
-        if(!pacientes.isEmpty())p.setPaciente(pacientes.poll());
+        if(!pacientes.isEmpty()){
+            System.out.println(pacientes);
+            p.setPaciente(pacientes.poll());
+            VentanaInicio.colocarPuestos();
+        }
         //Solo imprimo por pantalla para comprobar funcionamiento
         System.out.println(puestos);
         return true;
@@ -64,7 +78,10 @@ public class Sistema {
         if(p==null) throw new NullPointerException("Ingreso un paciente vacio");
         pacientes.offer(p);
         Puesto puesto = buscarPuestoDisponible();
-        if(puesto!=null)puesto.setPaciente(pacientes.poll());
+        if(puesto!=null){
+            puesto.setPaciente(pacientes.poll());
+            VentanaInicio.colocarPuestos();
+        }
     }
     public boolean eliminarPuesto(Puesto p){
         if(p!=null || puestos.contains(p)){

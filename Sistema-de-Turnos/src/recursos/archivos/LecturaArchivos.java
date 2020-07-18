@@ -77,7 +77,7 @@ public class LecturaArchivos {
             String linea;
             while((linea=bf.readLine())!=null){
                 String[] lista=linea.split(",");
-                Paciente p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),Integer.parseInt(lista[3]),new Sintoma(lista[4],Integer.parseInt(lista[5])));
+                Paciente p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),new Sintoma(lista[4],Integer.parseInt(lista[5])));
                 pacientes.add(p);
             }
         }catch(FileNotFoundException e){
