@@ -44,4 +44,9 @@ public class Sintoma {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Sintoma{" + "sintoma=" + sintoma + '}';
+    }
 }

@@ -34,6 +34,7 @@ public class VentanaInicio {
         crearBajo();
         
         
+        
     }
     
     public BorderPane getRoot() {

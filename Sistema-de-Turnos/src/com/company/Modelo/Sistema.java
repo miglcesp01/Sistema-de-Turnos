@@ -6,16 +6,19 @@ import java.util.PriorityQueue;
 import recursos.archivos.LecturaArchivos;
 
 public class Sistema {
+    public static Sistema sistema=new Sistema();
     private List<Doctor> doctores;
     private PriorityQueue<Paciente> pacientes;
     private List<Puesto> puestos;
     private List<Sintoma> sintomas;
+    private int turnos=1;
 
-    public Sistema() {
+    private Sistema() {
         this.doctores = LecturaArchivos.leerArchivoDoctor();
-        this.pacientes = new PriorityQueue<>();
-        pacientes.addAll(LecturaArchivos.leerArchivoPaciente());
+        this.pacientes = new PriorityQueue<>((Paciente p1,Paciente p2)-> p2.getSintoma().getPrioridad()-p1.getSintoma().getPrioridad());
+        //pacientes.addAll(LecturaArchivos.leerArchivoPaciente());
         this.puestos = new LinkedList<>();
+        this.sintomas=LecturaArchivos.leerArchivoSintomas();
     }
 
     public List<Doctor> getDoctores() {
@@ -51,4 +54,7 @@ public class Sistema {
         return false;
     }
 
+    public int generarTurno(){
+        return turnos++;
+    }
 }

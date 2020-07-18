@@ -3,13 +3,11 @@ package com.company.Modelo;
 public class Puesto {
     private Paciente paciente;
     private Doctor doctor;
-    private String turno;
     private int numero;
     private boolean disponibilidad;
 
-    public Puesto(Doctor doctor,String turno,int numero){
-        this.doctor=doctor;
-        this.turno=turno;
+    public Puesto(Doctor doctor,int numero){
+        this.doctor=doctor; 
         this.numero=numero;
         disponibilidad=true;
     }
@@ -18,9 +16,6 @@ public class Puesto {
     }
     public Doctor getDoctor(){
         return doctor;
-    }
-    public String getTurno(){
-        return turno;
     }
     public int getNumero(){
         return numero;

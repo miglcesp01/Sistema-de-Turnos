@@ -8,12 +8,12 @@ public class Paciente extends Persona{
     private String receta;
 
 
-    public Paciente(String nombre, int edad,char genero,Sintoma sintoma){
+    public Paciente(String nombre, int edad,char genero,int turno,Sintoma sintoma){
         super(nombre);
         this.edad=edad;
         this.genero=genero;
         this.sintoma=sintoma;
-        turno=0;
+        this.turno=turno;
         receta=null;
     }
 

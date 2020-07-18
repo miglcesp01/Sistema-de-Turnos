@@ -25,7 +25,7 @@ public class SistemaDeTurnos extends Application {
     public void start(Stage arg0) throws Exception {
         primaryStage = arg0;
         Scene sc = new Scene(new VentanaInicio().getRoot(), 730, 550);
-        primaryStage.setTitle("prueba");
+        primaryStage.setTitle("Sistema de Turnos");
         primaryStage.setScene(sc);
         primaryStage.show();
     }

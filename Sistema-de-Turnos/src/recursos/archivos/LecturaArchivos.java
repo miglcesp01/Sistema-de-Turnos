@@ -8,6 +8,7 @@ package recursos.archivos;
 import com.company.Modelo.Doctor;
 import com.company.Modelo.Paciente;
 import com.company.Modelo.Sintoma;
+import com.company.Modelo.Sistema;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -40,10 +41,10 @@ public class LecturaArchivos {
     
     public static List<Sintoma> leerArchivoSintomas(){
         List<Sintoma> sintomas=new LinkedList<>();
-        try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/sintomas.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader("src/recursos/archivos/sintomas.txt"))){
             String linea;
             while((linea=bf.readLine())!=null){
-                String[] lista=linea.split("|");
+                String[] lista=linea.split("\\|");
                 sintomas.add(new Sintoma(lista[0],Integer.parseInt(lista[1])));
             }
         }catch(FileNotFoundException e){
@@ -57,7 +58,7 @@ public class LecturaArchivos {
     
     public static List<Doctor> leerArchivoDoctor(){
         List<Doctor> doctores=new LinkedList<>();
-        try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/doctores.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader("src/recursos/archivos/doctores.txt"))){
             String linea;
             while((linea=bf.readLine())!=null){
                 String[] lista=linea.split(",");
@@ -72,11 +73,16 @@ public class LecturaArchivos {
     
     public static List<Paciente> leerArchivoPaciente(){
         List<Paciente> pacientes=new LinkedList<>();
-        try(BufferedReader bf=new BufferedReader(new FileReader("/src/recursos/archivos/pacientes.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader("src/recursos/archivos/pacientes.txt"))){
             String linea;
             while((linea=bf.readLine())!=null){
                 String[] lista=linea.split(",");
-                pacientes.add(new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),new Sintoma(lista[3],Integer.parseInt(lista[4]))));
+                System.out.println(lista[0]);
+                System.out.println(Integer.parseInt(lista[1]));
+                System.out.println(lista[2].charAt(0));
+                System.out.println(new Sintoma(lista[3],Integer.parseInt(lista[4])));
+                Paciente p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),Sistema.sistema.generarTurno(),new Sintoma(lista[3],Integer.parseInt(lista[4])));
+                pacientes.add(p);
             }
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());

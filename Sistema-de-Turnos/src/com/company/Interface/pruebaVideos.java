@@ -6,13 +6,23 @@
 
 package com.company.Interface;
 
+import com.company.Modelo.Paciente;
+import com.company.Modelo.Puesto;
+import com.company.Modelo.Sintoma;
+import com.company.Modelo.Sistema;
 import java.io.File;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -66,7 +76,7 @@ public class pruebaVideos extends Application {
         
         v1.getChildren().addAll(logo,createMediaView(listaVideos));
         
-        v2.getChildren().addAll(tiempo);
+        v2.getChildren().addAll(tiempo,generarTabla());
         v2.setAlignment(Pos.TOP_RIGHT);
         h2.getChildren().addAll(v1,v2);
         VBox root = new VBox(h2,horario);
@@ -116,6 +126,27 @@ public class pruebaVideos extends Application {
     } 
     }
     
+    
+    private TableView generarTabla(){
+        TableView tabla=new TableView();
+        tabla.setEditable(true);
+        List<Paciente> to=new LinkedList<>();
+        to.add(new Paciente("Eddo",12,'m',Sistema.sistema.generarTurno(),new Sintoma("Gripe",1)));
+        to.add(new Paciente("Eddo",13,'m',Sistema.sistema.generarTurno(),new Sintoma("Gripe",1)));
+        to.add(new Paciente("Eddo",14,'m',Sistema.sistema.generarTurno(),new Sintoma("Gripe",1)));
+        List<Puesto> p=new LinkedList<>();
+        p.add(new Puesto(Sistema.sistema.getDoctores().get(1),1));
+        p.add(new Puesto(Sistema.sistema.getDoctores().get(2),2));
+        p.add(new Puesto(Sistema.sistema.getDoctores().get(3),3));
+        TableColumn<String,Paciente> turno=new TableColumn<>("Turno");
+        TableColumn<String,Puesto> puesto=new TableColumn<>("puesto");
+        tabla.getColumns().addAll(turno, puesto);
+        turno.setCellValueFactory(new PropertyValueFactory("turno"));
+        puesto.setCellValueFactory(new PropertyValueFactory("numero"));
+        
+        
+        return tabla;
+    }
     
 
 }
