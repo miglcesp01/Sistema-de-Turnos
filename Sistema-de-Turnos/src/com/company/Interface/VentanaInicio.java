@@ -20,6 +20,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import recursos.archivos.CircularSimplyLinkedList;
 import com.company.Interface.Video;
+import com.company.controller.Formulario;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 /**
  *
  * @author Alexis
@@ -29,9 +34,10 @@ public class VentanaInicio {
     
     public VentanaInicio() {
         root = new BorderPane();
-        crearRigth();
-        crearLeft();
+        crearTop();
+        crearCentro();
         crearBajo();
+        crearLeft();
         
         
         
@@ -41,26 +47,41 @@ public class VentanaInicio {
         return root;
     }
 
-    private void crearRigth() {
+    private void crearTop() {
         Label reloj = new Label("");
         Thread cl = new Thread(new Time(reloj));
         cl.start();
-        VBox cont=new VBox();
-        cont.getChildren().addAll(reloj);
-        root.setRight(cont);
+        Label lo=new Label("Logo");
+        HBox cont=new HBox();
+        cont.getChildren().addAll(lo,reloj);
+        cont.setSpacing(600);
+        root.setTop(cont);
     }
     
     private void crearLeft(){
         VBox cont=new VBox();
-        Label lo=new Label("Logo");
-        cont.getChildren().addAll(lo,(new Video().getVideo()));
+        Button turno=new Button("Sacar un turno");
+        Button addDoc=new Button("Ingresar nuevo Doctor");
+        cont.getChildren().addAll(turno,addDoc);
+        cont.setSpacing(30);
+        turno.setOnMouseClicked(e -> {Formulario.crearFormularioPaciente();});
+        addDoc.setOnMouseClicked(e -> {Formulario.crearFormularioDoctor();});
         root.setLeft(cont);
+        
+    }
+    
+    private void crearCentro(){
+        VBox cont=new VBox();
+        cont.getChildren().addAll((new Video().getVideo()));
+        root.setCenter(cont);
     }
     
     private void crearBajo(){
         Label atencion=new Label("Horario de Atención de Lunes a Viernes de 10 a 18 hs/ Sabado");
         root.setBottom(atencion);
     }
+    
+    
 
     private class Time implements Runnable {
 
@@ -94,4 +115,5 @@ public class VentanaInicio {
 
     }
 
+    
 }

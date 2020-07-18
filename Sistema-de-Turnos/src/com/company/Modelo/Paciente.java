@@ -7,7 +7,15 @@ public class Paciente extends Persona{
     private int turno;
     private String receta;
 
-
+    public Paciente(String nombre, int edad,char genero,Sintoma sintoma){
+        super(nombre);
+        this.edad=edad;
+        this.genero=genero;
+        this.sintoma=sintoma;
+        receta=null;
+        turno=Sistema.sistema.generarTurno();
+    }
+    
     public Paciente(String nombre, int edad,char genero,int turno,Sintoma sintoma){
         super(nombre);
         this.edad=edad;

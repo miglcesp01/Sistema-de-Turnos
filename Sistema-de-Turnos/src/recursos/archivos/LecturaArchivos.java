@@ -77,11 +77,7 @@ public class LecturaArchivos {
             String linea;
             while((linea=bf.readLine())!=null){
                 String[] lista=linea.split(",");
-                System.out.println(lista[0]);
-                System.out.println(Integer.parseInt(lista[1]));
-                System.out.println(lista[2].charAt(0));
-                System.out.println(new Sintoma(lista[3],Integer.parseInt(lista[4])));
-                Paciente p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),Sistema.sistema.generarTurno(),new Sintoma(lista[3],Integer.parseInt(lista[4])));
+                Paciente p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),Integer.parseInt(lista[3]),new Sintoma(lista[4],Integer.parseInt(lista[5])));
                 pacientes.add(p);
             }
         }catch(FileNotFoundException e){

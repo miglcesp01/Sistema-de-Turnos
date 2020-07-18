@@ -6,6 +6,8 @@ public class Doctor extends Persona {
 
     private String identificacion;
     private String especialidad;
+    private boolean disponibilidad;
+    
     
     //private Paciente paciente;
 
@@ -13,6 +15,7 @@ public class Doctor extends Persona {
         super(nombre);
         this.especialidad=especialidad;
         this.identificacion=identificacion;
+        disponibilidad=true;
     }
 
     public String getEspecialidad(){
@@ -25,6 +28,13 @@ public class Doctor extends Persona {
     
     public String getIdentificacion(){
         return identificacion;
+    }
+    public void setDisponibilidad(boolean disponibilidad){
+        this.disponibilidad=disponibilidad;
+    }
+    
+    public boolean getDisponibilidad(){
+        return disponibilidad;
     }
 
     @Override
