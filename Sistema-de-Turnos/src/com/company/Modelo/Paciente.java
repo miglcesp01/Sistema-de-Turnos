@@ -61,6 +61,6 @@ public class Paciente extends Persona{
     }
     
     public String toString(){
-        return nombre+":"+String.valueOf(sintoma.getPrioridad());
+        return nombre+":"+String.valueOf(turno);
     }
 }

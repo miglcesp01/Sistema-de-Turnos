@@ -16,7 +16,7 @@ public class Sistema {
 
     private Sistema() {
         this.doctores = LecturaArchivos.leerArchivoDoctor();
-        this.pacientes = new PriorityQueue<>((Paciente p1,Paciente p2)-> p2.getSintoma().getPrioridad()-p1.getSintoma().getPrioridad());   
+        this.pacientes = new PriorityQueue<>((Paciente p1,Paciente p2)-> p1.getSintoma().getPrioridad()-p2.getSintoma().getPrioridad());   
         pacientes.addAll(LecturaArchivos.leerArchivoPaciente());
         this.puestos = new LinkedList<>();
         this.sintomas=LecturaArchivos.leerArchivoSintomas();
@@ -24,11 +24,13 @@ public class Sistema {
     }
     
     private void asignarTurnosIniciales(){
-        for(Paciente p:pacientes){
+        List<Paciente> tmp = new LinkedList<>(); 
+        while(!pacientes.isEmpty()){
+            Paciente p = pacientes.poll();
             p.setTurno(turnos++);
+            tmp.add(p);
         }
-        System.out.println(pacientes);
-        
+        pacientes.addAll(tmp);
     }
 
     public List<Doctor> getDoctores() {
@@ -65,23 +67,22 @@ public class Sistema {
         puestos.add(p);
         doctor.setDisponibilidad(false);
         if(!pacientes.isEmpty()){
-            System.out.println(pacientes);
             p.setPaciente(pacientes.poll());
             VentanaInicio.colocarPuestos();
         }
-        //Solo imprimo por pantalla para comprobar funcionamiento
-        System.out.println(puestos);
         return true;
     }
     
     public void agregarPaciente(Paciente p){
         if(p==null) throw new NullPointerException("Ingreso un paciente vacio");
         pacientes.offer(p);
+        
         Puesto puesto = buscarPuestoDisponible();
         if(puesto!=null){
             puesto.setPaciente(pacientes.poll());
             VentanaInicio.colocarPuestos();
         }
+        
     }
     public boolean eliminarPuesto(Puesto p){
         if(p!=null || puestos.contains(p)){
