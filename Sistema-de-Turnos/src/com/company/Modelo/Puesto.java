@@ -60,7 +60,8 @@ public class Puesto {
 
     @Override
     public String toString() {
-        return "Puesto{" + "paciente=" + paciente + ", doctor=" + doctor + ", numero=" + numero + ", disponibilidad=" + disponibilidad + '}';
+        if(paciente==null) return"Puesto{" + "paciente= Ninguno" + ", doctor=" + doctor + ", numero=" + numero + ", disponibilidad=" + disponibilidad + '}';
+        return "Puesto{" + "paciente=" + paciente.getNombre() + ", doctor=" + doctor + ", numero=" + numero + ", disponibilidad=" + disponibilidad + '}';
     }
 
 }

@@ -51,8 +51,10 @@ public class Sistema {
     }
     
     public boolean generarPuesto(Doctor doctor, int puesto){
-        puestos.add(new Puesto(doctor,puesto));
+        Puesto p = new Puesto(doctor,puesto);
+        puestos.add(p);
         doctor.setDisponibilidad(false);
+        if(!pacientes.isEmpty())p.setPaciente(pacientes.poll());
         //Solo imprimo por pantalla para comprobar funcionamiento
         System.out.println(puestos);
         return true;
@@ -61,9 +63,14 @@ public class Sistema {
     public void agregarPaciente(Paciente p){
         if(p==null) throw new NullPointerException("Ingreso un paciente vacio");
         pacientes.offer(p);
+        Puesto puesto = buscarPuestoDisponible();
+        if(puesto!=null)puesto.setPaciente(pacientes.poll());
     }
     public boolean eliminarPuesto(Puesto p){
-        if(p!=null || puestos.contains(p)) puestos.remove(p);
+        if(p!=null || puestos.contains(p)){
+            p.getDoctor().setDisponibilidad(true);
+            puestos.remove(p);
+        } 
         return false;
     }
 
