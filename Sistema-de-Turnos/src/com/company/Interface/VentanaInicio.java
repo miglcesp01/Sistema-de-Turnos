@@ -83,7 +83,7 @@ public class VentanaInicio {
         crearP.setOnMouseClicked(e->{
             System.out.println(Sistema.sistema.getPuestos().size());
             Doctor doctor = Sistema.sistema.buscarDoctorDisponible();
-            if(doctor!=null)Sistema.sistema.generarPuesto(doctor, Sistema.sistema.getPuestos().size()+1);  
+            if(doctor!=null)Sistema.sistema.generarPuesto(doctor);  
         });
         eliminarP.setOnMouseClicked(e->{
             //Creando la nueva ventana
