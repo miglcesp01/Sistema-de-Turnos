@@ -58,6 +58,7 @@ public class Formulario {
             String a=obtenerTexto(age);
             String g=obtenerTexto(gender);
             if(!"".equals(n) && !"".equals(a) && !"".equals(g)){
+                System.out.println(((Sintoma)sint.getValue()).getPrioridad());
                 Sistema.sistema.agregarPaciente(new Paciente(n,Integer.parseInt(a),g.charAt(0),(Sintoma)sint.getValue()));
                 window.close();
             }else error.setVisible(true); 
