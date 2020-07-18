@@ -135,15 +135,21 @@ public class pruebaVideos extends Application {
         to.add(new Paciente("Eddo",13,'m',Sistema.sistema.generarTurno(),new Sintoma("Gripe",1)));
         to.add(new Paciente("Eddo",14,'m',Sistema.sistema.generarTurno(),new Sintoma("Gripe",1)));
         List<Puesto> p=new LinkedList<>();
+        Puesto p1 = new Puesto(Sistema.sistema.getDoctores().get(1),1);
+        p1.setPaciente(new Paciente("Eddo",12,'m',Sistema.sistema.generarTurno(),new Sintoma("Gripe",1)));
+        /*
         p.add(new Puesto(Sistema.sistema.getDoctores().get(1),1));
         p.add(new Puesto(Sistema.sistema.getDoctores().get(2),2));
         p.add(new Puesto(Sistema.sistema.getDoctores().get(3),3));
-        TableColumn<String,Paciente> turno=new TableColumn<>("Turno");
-        TableColumn<String,Puesto> puesto=new TableColumn<>("puesto");
-        tabla.getColumns().addAll(turno, puesto);
-        turno.setCellValueFactory(new PropertyValueFactory("turno"));
-        puesto.setCellValueFactory(new PropertyValueFactory("numero"));
+        */
+        p.add(p1);
+        TableColumn<Paciente,Puesto> turno=new TableColumn<>("Turno");
+        turno.setCellValueFactory(new PropertyValueFactory<>("paciente"));
+        TableColumn<Integer,Puesto> puesto=new TableColumn<>("puesto");
+        puesto.setCellValueFactory(new PropertyValueFactory<>("numero"));
         
+        tabla.getColumns().addAll(turno,puesto);
+        tabla.getItems().addAll(p);
         
         return tabla;
     }

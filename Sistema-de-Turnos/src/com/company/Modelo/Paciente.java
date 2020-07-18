@@ -51,4 +51,8 @@ public class Paciente extends Persona{
     public String getReceta(){
         return receta;
     }
+    
+    public String toString(){
+        return String.valueOf(turno);
+    }
 }
