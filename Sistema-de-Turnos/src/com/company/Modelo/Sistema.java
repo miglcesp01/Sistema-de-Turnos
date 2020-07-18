@@ -15,8 +15,7 @@ public class Sistema {
 
     private Sistema() {
         this.doctores = LecturaArchivos.leerArchivoDoctor();
-        this.pacientes = new PriorityQueue<>((Paciente p1,Paciente p2)-> p2.getSintoma().getPrioridad()-p1.getSintoma().getPrioridad());
-        pacientes.addAll(LecturaArchivos.leerArchivoPaciente());
+        this.pacientes = LecturaArchivos.leerArchivoPaciente();
         this.puestos = new LinkedList<>();
         this.sintomas=LecturaArchivos.leerArchivoSintomas();
     }

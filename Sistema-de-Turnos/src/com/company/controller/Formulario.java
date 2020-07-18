@@ -9,9 +9,12 @@ import com.company.Modelo.Doctor;
 import com.company.Modelo.Paciente;
 import com.company.Modelo.Sintoma;
 import com.company.Modelo.Sistema;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -31,10 +34,6 @@ import javafx.stage.Stage;
 public class Formulario {
     
     public static void crearFormularioPaciente(){
-        Stage window = new Stage();
-        window.setTitle("Sacar turno");
-        window.setMinHeight(400);
-        window.setMinWidth(400);
         HBox name=txField("Ingrese su nombre: ");
         HBox age=txField("Ingrese su edad: ");
         HBox gender=txField("Igrese su genero(M o F): " );
@@ -50,35 +49,30 @@ public class Formulario {
         layout.setSpacing(20);
         layout.getChildren().addAll(name,age,gender,syntomy,ok,error);
         layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout,200,200);
-        window.setScene(scene);
+        Stage window=generarScene(layout, "Sacar Turno");
         window.show();
         ok.setOnMouseClicked(e -> { 
             String n=obtenerTexto(name);
             String a=obtenerTexto(age);
             String g=obtenerTexto(gender);
             if(!"".equals(n) && !"".equals(a) && !"".equals(g)){
-                Sistema.sistema.agregarPaciente(new Paciente(n,Integer.parseInt(a),g.charAt(0),(Sintoma)sint.getValue()));
+                Paciente p=new Paciente(n,Integer.parseInt(a),g.charAt(0),(Sintoma)sint.getValue());
+                Sistema.sistema.agregarPaciente(p);
                 window.close();
             }else error.setVisible(true); 
              });
     }
     
     public static void crearFormularioDoctor(){
-        Stage window = new Stage();
-        window.setTitle("Ingreso de nuevo Doctor");
-        window.setMinHeight(400);
-        window.setMinWidth(400);
         HBox name=txField("Ingrese su nombre: ");
         HBox esp=txField("Ingrese su especialidad: ");
         HBox id=txField("Igrese su identificación: " );
         Button ok = new Button("Ok");
-        VBox layout = new VBox();
+        VBox layout=new VBox();
         layout.setSpacing(20);
         layout.getChildren().addAll(name,esp,id,ok);
         layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout,200,200);
-        window.setScene(scene);
+        Stage window = generarScene(layout, "Crear Doctor");
         window.show();
         ok.setOnMouseClicked(e -> { 
             String n=obtenerTexto(name);
@@ -91,6 +85,15 @@ public class Formulario {
              });
     }
     
+    private static Stage generarScene(Node root,String titulo){
+        Stage window = new Stage();
+        window.setTitle(titulo);
+        window.setMinHeight(400);
+        window.setMinWidth(400);
+        Scene scene = new Scene((Parent)root,200,200);
+        window.setScene(scene);
+        return window;
+    }
     
     
     private static HBox txField(String texto){

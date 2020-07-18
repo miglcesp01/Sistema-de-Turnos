@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  *
@@ -71,14 +72,15 @@ public class LecturaArchivos {
         }return doctores;
     }
     
-    public static List<Paciente> leerArchivoPaciente(){
-        List<Paciente> pacientes=new LinkedList<>();
+    public static PriorityQueue<Paciente> leerArchivoPaciente(){
+        PriorityQueue<Paciente> pacientes=new PriorityQueue<>((Paciente p1, Paciente p2)-> p2.getSintoma().getPrioridad()-p2.getSintoma().getPrioridad());
         try(BufferedReader bf=new BufferedReader(new FileReader("src/recursos/archivos/pacientes.txt"))){
             String linea;
+            Paciente p;
             while((linea=bf.readLine())!=null){
                 String[] lista=linea.split(",");
-                Paciente p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),Integer.parseInt(lista[3]),new Sintoma(lista[4],Integer.parseInt(lista[5])));
-                pacientes.add(p);
+                p=new Paciente(lista[0],Integer.parseInt(lista[1]),lista[2].charAt(0),Integer.parseInt(lista[3]),new Sintoma(lista[4],(int)Integer.parseInt(lista[5])));
+                pacientes.offer(p);
             }
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
