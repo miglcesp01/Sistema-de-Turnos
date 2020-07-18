@@ -26,6 +26,8 @@ import com.company.Modelo.Puesto;
 import com.company.Modelo.Puesto;
 import com.company.Modelo.Sintoma;
 import com.company.controller.Formulario;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -86,42 +88,64 @@ public class VentanaInicio {
             if(doctor!=null)Sistema.sistema.generarPuesto(doctor, Sistema.sistema.getPuestos().size()+1);  
         });
         eliminarP.setOnMouseClicked(e->{
-            //Creando la nueva ventana
-            Stage window = new Stage();
-            window.setTitle("Eliminar Puesto");
-            window.setMinHeight(500);
-            window.setMinWidth(500);
-            //Creando el comboBox de los puestos que existen
-            ObservableList<Puesto> puestos= FXCollections.observableList(Sistema.sistema.getPuestos());
-            ComboBox comboPuestos=new ComboBox(puestos);
-            //Creando el boton para elimianr los puestos
-            Button eliminar = new Button("Eliminar Puesto");
-            //Creando el contenedor de la venana Eliminar Puesto
-            VBox root = new VBox();
-            HBox layout = new HBox();
-            layout.getChildren().addAll(comboPuestos,eliminar);
-            root.getChildren().add(layout);
-            Scene scene = new Scene(root,200,200);
-            window.setScene(scene);
-            window.show();
-            
-            //Accion del elemento eliminar
-            eliminar.setOnMouseClicked(e1->{
-                Puesto p = (Puesto) comboPuestos.getValue();
-                if(p!=null){
-                    Sistema.sistema.eliminarPuesto(p);
-                    window.close();  
-                }
-                else{
-                    Label lbl = new Label("No se ha escogido un Puesto");
-                    HBox H2 = new HBox(lbl);
-                    H2.setAlignment(Pos.CENTER);
-                    root.getChildren().add(H2);
-                }
-            });
+            //Tomando los puestos que estan disponibles
+            List<Puesto> puestos = Sistema.sistema.getPuestos();
+            List<Puesto> puestos2 = new ArrayList<>();
+            for(Puesto p:puestos){
+                if(p.getPaciente()==null) puestos2.add(p);
+            }
+            if(puestos2.size()>0){
+                //Creando la nueva ventana
+                Stage window = new Stage();
+                window.setTitle("Eliminar Puesto");
+                window.setMinHeight(500);
+                window.setMinWidth(500);
+                //Creando el comboBox de los puestos que existen
+
+                ObservableList<Puesto> puestosOL= FXCollections.observableList(puestos2);
+                ComboBox comboPuestos=new ComboBox(puestosOL);
+                //Creando el boton para elimianr los puestos
+                Button eliminar = new Button("Eliminar Puesto");
+                //Creando el contenedor de la venana Eliminar Puesto
+                VBox root = new VBox();
+                HBox layout = new HBox();
+                layout.getChildren().addAll(comboPuestos,eliminar);
+                root.getChildren().add(layout);
+                Scene scene = new Scene(root,200,200);
+                window.setScene(scene);
+                window.show();
+
+                //Accion del elemento eliminar
+                eliminar.setOnMouseClicked(e1->{
+                    Puesto p = (Puesto) comboPuestos.getValue();
+                    if(p!=null){
+                        Sistema.sistema.eliminarPuesto(p);
+                        window.close();  
+                    }
+                    else{
+                        Label lbl = new Label("No se ha escogido un Puesto");
+                        HBox H2 = new HBox(lbl);
+                        H2.setAlignment(Pos.CENTER);
+                        root.getChildren().add(H2);
+                    }
+                });
+            }else{
+                Stage window = new Stage();
+                window.setTitle("Eliminar Puesto");
+                window.setMinHeight(300);
+                window.setMinWidth(300);
+                Label lbl = new Label("No hay puestos disponible");
+                Label lbl2 = new Label("Espere a que un paciente sea atendido");
+                VBox v1 = new VBox(lbl,lbl2);
+                v1.setAlignment(Pos.CENTER);
+                Scene scene = new Scene(v1,300,300);
+                window.setScene(scene);
+                window.show();
+            }
+
         });
         root.setLeft(cont);
-        
+    
     }
     
     private void crearCentro(){
