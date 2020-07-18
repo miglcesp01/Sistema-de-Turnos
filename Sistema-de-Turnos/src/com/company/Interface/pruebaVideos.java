@@ -19,6 +19,7 @@ import static javafx.application.Application.launch;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -75,8 +76,19 @@ public class pruebaVideos extends Application {
         
         
         v1.getChildren().addAll(logo,createMediaView(listaVideos));
-        
-        v2.getChildren().addAll(tiempo,generarTabla());
+        TableView tabla = generarTabla();
+        Button botonPrueba = new Button("Prueba eliminar");
+        Button botonAgregar = new Button("Prueba agregar");
+        v2.getChildren().addAll(tiempo,tabla,botonPrueba,botonAgregar);
+        //Puesto Prueba para eliminacion; ignorar
+        Puesto p1 = new Puesto(Sistema.sistema.getDoctores().get(1),1);
+        p1.setPaciente(new Paciente("Eddo",12,'m',4,new Sintoma("Gripe",1)));
+        botonPrueba.setOnAction(e->{
+            tabla.getItems().remove(p1);
+        });
+        botonAgregar.setOnAction(e->{
+             tabla.getItems().add(p1);
+        });
         v2.setAlignment(Pos.TOP_RIGHT);
         h2.getChildren().addAll(v1,v2);
         VBox root = new VBox(h2,horario);

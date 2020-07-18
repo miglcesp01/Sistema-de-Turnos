@@ -18,6 +18,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -38,11 +40,15 @@ public class Formulario {
         HBox gender=txField("Igrese su genero(M o F): " );
         ObservableList<Sintoma> sintomas= FXCollections.observableList(Sistema.sistema.getSintomas());
         ComboBox sint=new ComboBox(sintomas);
-        HBox syntomy=new HBox(new Label("ELija su sintoma"),sint);
+        Region espacio = new Region();
+        HBox syntomy=new HBox(new Label("ELija su sintoma"),espacio,sint);
+        HBox.setHgrow(espacio, Priority.ALWAYS);
         Button ok = new Button("Ok");
+        Label error = new Label("Ingreso algun valor erroneo");
+        error.setVisible(false);
         VBox layout = new VBox();
         layout.setSpacing(20);
-        layout.getChildren().addAll(name,age,gender,syntomy,ok);
+        layout.getChildren().addAll(name,age,gender,syntomy,ok,error);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout,200,200);
         window.setScene(scene);
@@ -51,10 +57,10 @@ public class Formulario {
             String n=obtenerTexto(name);
             String a=obtenerTexto(age);
             String g=obtenerTexto(gender);
-            if(n!=null && a!=null && g!=null){
+            if(!"".equals(n) && !"".equals(a) && !"".equals(g)){
                 Sistema.sistema.agregarPaciente(new Paciente(n,Integer.parseInt(a),g.charAt(0),(Sintoma)sint.getValue()));
                 window.close();
-            }else layout.getChildren().add(new Label("Ingreso algun valor erroneo")); 
+            }else error.setVisible(true); 
              });
     }
     
@@ -91,12 +97,14 @@ public class Formulario {
         HBox contG=new HBox();
         Label lbl=new Label(texto);
         TextField field=new TextField();
-        contG.getChildren().addAll(lbl,field);
+        Region espacio = new Region();
+        HBox.setHgrow(espacio, Priority.ALWAYS);
+        contG.getChildren().addAll(lbl,espacio,field);
         return contG;
     }
     
     private static String obtenerTexto(HBox box){
-        return ((TextField)box.getChildren().get(1)).getText();
+        return ((TextField)box.getChildren().get(2)).getText();
     }
     
 }

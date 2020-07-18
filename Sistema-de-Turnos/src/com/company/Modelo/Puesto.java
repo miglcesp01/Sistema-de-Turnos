@@ -1,5 +1,7 @@
 package com.company.Modelo;
 
+import java.util.Objects;
+
 public class Puesto {
     private Paciente paciente;
     private Doctor doctor;
@@ -31,6 +33,24 @@ public class Puesto {
     
     public boolean getDisponibilida(){
         return disponibilidad;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Puesto other = (Puesto) obj;
+        if (!Objects.equals(this.paciente, other.paciente)) {
+            return false;
+        }
+        return true;
     }
 
 }
