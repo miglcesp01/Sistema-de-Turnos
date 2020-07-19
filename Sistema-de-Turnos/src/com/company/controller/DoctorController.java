@@ -28,7 +28,12 @@ public class DoctorController {
         operador=doc;
     }
     
-    public Pane atenderPaciente(Paciente pac){
+    public void atenderPaciente(Paciente pac){
+        Stage window = new Stage();
+        window.setTitle("Atender paciente");
+        window.setMinHeight(300);
+        window.setMinWidth(300);
+        
         VBox root=new VBox();
         Label pre=new Label("Bienvenido Paciente "+pac.getNombre()+" ¿Qué sintomas presenta?");
         Label sint=new Label("\n Entiendo, presenta "+pac.getSintoma().getSintoma());
@@ -37,10 +42,16 @@ public class DoctorController {
         Label rec=new Label("\n Le voy a recetar:");
         TextField txRec=new TextField();      
         Button ok=new Button("ok");
-        ok.setOnMouseClicked(e->{generarReceta(txRec.getText());});
+        ok.setOnMouseClicked(e->{
+            generarReceta(txRec.getText());
+            window.close();
+        });
         pac.setReceta(txRec.getText());
-        root.getChildren().addAll(pre,sint,diag,txDiag,rec,txRec);
-        return root;
+        root.getChildren().addAll(pre,sint,diag,txDiag,rec,txRec,ok);
+        
+        Scene scene = new Scene(root,350,350);
+        window.setScene(scene);
+        window.show();
     }
     
     private void generarReceta(String receta){
@@ -60,6 +71,10 @@ public class DoctorController {
         window.show();
         ok.setOnMouseClicked(e -> { window.close(); });
         
+    }
+    
+    public Doctor getDoctor(){
+        return this.operador;
     }
     
     

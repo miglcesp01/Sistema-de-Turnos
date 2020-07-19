@@ -25,12 +25,15 @@ import com.company.Modelo.Paciente;
 import com.company.Modelo.Puesto;
 import com.company.Modelo.Puesto;
 import com.company.Modelo.Sintoma;
+import com.company.controller.DoctorController;
 import com.company.controller.Formulario;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -73,19 +76,34 @@ public class VentanaInicio {
     }
     
     private void crearLeft(){
+        //Creando contenedor de los elementos del left
         VBox cont=new VBox();
+        
+        //Creando los botones de la dinamica del sistema
         Button turno=new Button("Sacar un turno");
         Button addDoc=new Button("Ingresar nuevo Doctor");
         Button crearP = new Button("Crear Puesto");
         Button eliminarP = new Button("Eliminar Puesto");
-        cont.getChildren().addAll(turno,addDoc,crearP,eliminarP);
-        cont.setSpacing(30);
+        Button atenderP = new Button("Atender Paciente");
+        
+        //Anadiendo los nodos al conteneder del left
+        cont.getChildren().addAll(turno,addDoc,crearP,eliminarP,atenderP);
+        cont.setSpacing(10);
+        
+        //Anadiendo las acciones de los botones
         turno.setOnMouseClicked(e -> {Formulario.crearFormularioPaciente();});
         addDoc.setOnMouseClicked(e -> {Formulario.crearFormularioDoctor();});
         crearP.setOnMouseClicked(e->{
-            System.out.println(Sistema.sistema.getPuestos().size());
             Doctor doctor = Sistema.sistema.buscarDoctorDisponible();
-            if(doctor!=null)Sistema.sistema.generarPuesto(doctor);  
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            if(doctor!=null){
+                Sistema.sistema.generarPuesto(doctor);
+                alert.setHeaderText("Se ha creado un puesto con el doctor: Dr. "+doctor.getNombre());
+            }else{
+                alert.setHeaderText("No hay doctores disponibles para crear puestos");
+            }
+            alert.show();
         });
         eliminarP.setOnMouseClicked(e->{
             //Tomando los puestos que estan disponibles
@@ -144,6 +162,39 @@ public class VentanaInicio {
             }
 
         });
+        
+        atenderP.setOnMouseClicked(e->{
+            
+            //creando la ventana de atender los pacientes
+            Stage window = new Stage();
+            window.setTitle("Atender paciente");
+            window.setMinHeight(300);
+            window.setMinWidth(300);
+            //Adquiriendo 
+            List<Puesto> puestos = Sistema.sistema.getPuestos();
+            List<Puesto> puestos2 = new ArrayList<>();
+            for(Puesto p : puestos){
+                if(p.getPaciente()!=null) puestos2.add(p);
+            }
+            ObservableList<Puesto> puestosOL= FXCollections.observableList(puestos2);
+            ComboBox comboPuestos=new ComboBox(puestosOL);
+            Button atender = new Button("Atender paciente");
+            VBox v1 = new VBox();
+            v1.setAlignment(Pos.CENTER);
+            v1.getChildren().addAll(comboPuestos,atender);
+            atender.setOnMouseClicked(e1->{
+               Puesto p = (Puesto)comboPuestos.getValue();
+               DoctorController dc = p.getDC();
+               
+               dc.atenderPaciente(p.getPaciente());
+               window.close();
+            });
+            window.setScene(new Scene(v1,300,300));
+            window.show();
+            
+        });
+        
+        //Anadiendo el conetenedor al root principal
         root.setLeft(cont);
     
     }
@@ -160,6 +211,7 @@ public class VentanaInicio {
         turno.setCellValueFactory(new PropertyValueFactory<>("paciente"));
         TableColumn<Integer,Puesto> puesto=new TableColumn<>("puesto");
         puesto.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        tablaTurnos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tablaTurnos.getColumns().addAll(turno,puesto);
         root.setRight(tablaTurnos);
         colocarPuestos();
