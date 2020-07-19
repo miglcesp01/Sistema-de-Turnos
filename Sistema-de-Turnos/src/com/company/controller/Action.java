@@ -60,8 +60,11 @@ public class Action {
                 //Creando el contenedor de la venana Eliminar Puesto
                 VBox root = new VBox();
                 HBox layout = new HBox();
+                root.setAlignment(Pos.CENTER);
+                layout.setAlignment(Pos.CENTER);
                 layout.getChildren().addAll(comboPuestos,eliminar);
                 root.getChildren().add(layout);
+                root.setStyle("-fx-background-image:url(recursos/archivos/images/eliminarP.jpg)");
                 Stage window=generarScene(root,"Eliminar Puesto");
                 window.show();
                 //Accion del elemento eliminar
@@ -81,7 +84,10 @@ public class Action {
             }else{ 
                 Label lbl = new Label("No hay puestos disponible");
                 Label lbl2 = new Label("Espere a que un paciente sea atendido");
+                lbl.setStyle("-fx-text-fill:black;-fx-font-size:25");
+                lbl2.setStyle("-fx-text-fill:black;-fx-font-size:25");
                 VBox v1 = new VBox(lbl,lbl2);
+                v1.setStyle("-fx-background-image:url(recursos/archivos/images/eliminarP.jpg)");
                 v1.setAlignment(Pos.CENTER);
                 Stage window =generarScene(v1, "Eliminar Puesto");
                 window.show();
@@ -103,24 +109,38 @@ public class Action {
     public static void atenderPaciente(){
             //Adquiriendo 
             List<Puesto> puestos = Sistema.sistema.puestosOcupados();
-            ObservableList<Puesto> puestosOL= FXCollections.observableList(puestos);
-            ComboBox comboPuestos=new ComboBox(puestosOL);
-            Button atender = new Button("Atender paciente");
-            VBox v1 = new VBox();
-            v1.setAlignment(Pos.CENTER);
-            v1.getChildren().addAll(comboPuestos,atender);
-            Stage window=generarScene(v1, "Atender Paciente");
-            window.show();
-            atender.setOnMouseClicked(e1->{
-               Puesto p = (Puesto)comboPuestos.getValue();
-                System.out.println(p);
-               if(p!=null && !puestosEnAtencion.contains(p)){
-                   p.atencion();
-                   puestosEnAtencion.add(p);
-               }
-               
-               window.close();
-            });
+            if(puestos.size()>0){
+                ObservableList<Puesto> puestosOL= FXCollections.observableList(puestos);
+                ComboBox comboPuestos=new ComboBox(puestosOL);
+                Button atender = new Button("Atender paciente");
+                VBox v1 = new VBox();
+                v1.setAlignment(Pos.CENTER);
+                v1.getChildren().addAll(comboPuestos,atender);
+                v1.setStyle("-fx-background-image:url(recursos/archivos/images/eliminarP.jpg)");
+                Stage window=generarScene(v1, "Atender Paciente");
+                window.show();
+                atender.setOnMouseClicked(e1->{
+                   Puesto p = (Puesto)comboPuestos.getValue();
+                    System.out.println(p);
+                   if(p!=null && !puestosEnAtencion.contains(p)){
+                       p.atencion();
+                       puestosEnAtencion.add(p);
+                   }
+
+                   window.close();
+                });
+            }else{
+                Label lbl = new Label("No hay pacientes para atender");
+                Label lbl2 = new Label("Espere a que un paciente ingrese");
+                lbl.setStyle("-fx-text-fill:black;-fx-font-size:25");
+                lbl2.setStyle("-fx-text-fill:black;-fx-font-size:25");
+                VBox v1 = new VBox(lbl,lbl2);
+                v1.setStyle("-fx-background-image:url(recursos/archivos/images/eliminarP.jpg)");
+                v1.setAlignment(Pos.CENTER);
+                Stage window =generarScene(v1, "Atender Paciente");
+                window.show();
+            }
+            
             
     }
     

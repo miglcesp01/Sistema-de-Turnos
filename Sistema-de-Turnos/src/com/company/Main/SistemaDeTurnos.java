@@ -24,7 +24,9 @@ public class SistemaDeTurnos extends Application {
     @Override
     public void start(Stage arg0) throws Exception {
         primaryStage = arg0;
-        Scene sc = new Scene(new VentanaInicio().getRoot(), 730, 550);
+        Scene sc = new Scene(new VentanaInicio().getRoot(), 830, 450);
+        sc.getStylesheets().add("recursos/archivos/CSS/stylesheetPrincipal.css");
+        //sc.getStylesheets().addAll(this.getClass().getResource("recursos/archivos/CSS/stylesheetPrincipal.css").toExternalForm());
         primaryStage.setTitle("Sistema de Turnos");
         primaryStage.setScene(sc);
         primaryStage.show();

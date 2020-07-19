@@ -41,6 +41,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 /**
@@ -48,18 +50,20 @@ import javafx.stage.Stage;
  * @author Alexis
  */
 public class VentanaInicio {
+    
     private BorderPane root;
     private static TableView tablaTurnos;
     
     public VentanaInicio() {
         root = new BorderPane();
+        root.setId("bpane");
         crearTop();
         crearCentro();
         crearBajo();
         crearLeft();
         crearRight();
-        
-        
+        root.setStyle("-fx-background-image: url(recursos/archivos/images/VentanaInicio.jpg);"
+                + "-fx-background-repeat: stretch;");
     }
     
     public BorderPane getRoot() {
@@ -67,12 +71,21 @@ public class VentanaInicio {
     }
 
     private void crearTop() {
+        Image img = new Image("recursos/archivos/images/Logo (1).png");
+        ImageView imgv = new ImageView(img);
         Label reloj = new Label("");
         Thread cl = new Thread(new Time(reloj));
         cl.start();
-        Label lo=new Label("Logo");
+        
+        VBox imagen = new VBox();
+        VBox hora = new VBox();
+        imagen.getChildren().add(imgv);
+        hora.getChildren().add(reloj);
+        imagen.setAlignment(Pos.CENTER);
+        hora.setAlignment(Pos.TOP_RIGHT);
+        
         HBox cont=new HBox();
-        cont.getChildren().addAll(lo,reloj);
+        cont.getChildren().addAll(imagen, hora);
         cont.setSpacing(600);
         root.setTop(cont);
     }
@@ -87,7 +100,11 @@ public class VentanaInicio {
         Button crearP = new Button("Crear Puesto");
         Button eliminarP = new Button("Eliminar Puesto");
         Button atenderP = new Button("Atender Paciente");
-        
+        turno.setId("botonesVI");
+        addDoc.setId("botonesVI");
+        eliminarP.setId("botonesVI");
+        atenderP.setId("botonesVI");
+        crearP.setId("botonesVI");
         //Anadiendo los nodos al conteneder del left
         cont.getChildren().addAll(turno,addDoc,crearP,eliminarP,atenderP);
         cont.setSpacing(10);
@@ -107,12 +124,16 @@ public class VentanaInicio {
     
     private void crearCentro(){
         VBox cont=new VBox();
+        cont.setId("video");
+        cont.setAlignment(Pos.CENTER);
         cont.getChildren().addAll((new Video().getVideo()));
         root.setCenter(cont);
+        
     }
     
     private void crearRight(){
         tablaTurnos = new TableView();
+        tablaTurnos.setId("tabla");
         TableColumn<Paciente,Puesto> turno=new TableColumn<>("Turno");
         turno.setCellValueFactory(new PropertyValueFactory<>("paciente"));
         TableColumn<Integer,Puesto> puesto=new TableColumn<>("puesto");
@@ -125,7 +146,9 @@ public class VentanaInicio {
     }
     
     private void crearBajo(){
-        Label atencion=new Label("Horario de Atención de Lunes a Viernes de 10 a 18 hs/ Sabado");
+        Label atencion=new Label("Horario de Atención de Lunes a Viernes de 10 a 18 hrs/ Sábado");
+        atencion.setStyle("-fx-text-fill:white;"
+                + "-fx-font-size:20px");
         root.setBottom(atencion);
     }
     
@@ -151,6 +174,7 @@ public class VentanaInicio {
 
         public Time(Label lbl) {
             this.lbl = lbl;
+            lbl.setId("hora");
         }
 
         @Override
@@ -165,6 +189,7 @@ public class VentanaInicio {
 
                     Platform.runLater(() -> {
                         lbl.setText(hour+":"+minute+":"+second);
+                        
                     });
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {

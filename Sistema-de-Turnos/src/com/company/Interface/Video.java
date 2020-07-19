@@ -53,8 +53,8 @@ public class Video {
                 mediaView.getMediaPlayer().play();
             }
         });
-        mediaView.setFitHeight(225);
-        mediaView.setFitWidth(300);
+        mediaView.setFitHeight(450);
+        mediaView.setFitWidth(450);
         return mediaView;
     }
     

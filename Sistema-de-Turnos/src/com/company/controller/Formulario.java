@@ -49,6 +49,7 @@ public class Formulario {
         layout.setSpacing(20);
         layout.getChildren().addAll(name,age,gender,syntomy,ok,error);
         layout.setAlignment(Pos.CENTER);
+        layout.setStyle("-fx-background-image: url(recursos/archivos/images/formularios.jpg);");
         Stage window=Action.generarScene(layout, "Sacar Turno");
         window.show();
         ok.setOnMouseClicked(e -> { 
@@ -67,11 +68,12 @@ public class Formulario {
         HBox name=txField("Ingrese su nombre: ");
         HBox esp=txField("Ingrese su especialidad: ");
         HBox id=txField("Igrese su identificación: " );
-        Button ok = new Button("Ok");
+        Button ok = new Button("Crear Doctor");
         VBox layout=new VBox();
-        layout.setSpacing(20);
-        layout.getChildren().addAll(name,esp,id,ok);
         layout.setAlignment(Pos.CENTER);
+        layout.setSpacing(5);
+        layout.getChildren().addAll(name,esp,id,ok);
+        layout.setStyle("-fx-background-image: url(recursos/archivos/images/formularios.jpg);");
         Stage window = Action.generarScene(layout, "Crear Doctor");
         window.show();
         ok.setOnMouseClicked(e -> { 
