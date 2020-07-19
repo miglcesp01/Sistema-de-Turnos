@@ -56,10 +56,15 @@ public class Formulario {
             String n=obtenerTexto(name);
             String a=obtenerTexto(age);
             String g=obtenerTexto(gender);
-            if(!"".equals(n) && !"".equals(a) && !"".equals(g)){
-                Paciente p=new Paciente(n,Integer.parseInt(a),g.charAt(0),(Sintoma)sint.getValue());
-                Sistema.sistema.agregarPaciente(p);
-                window.close();
+            if(!"".equals(n) && !"".equals(a) && !"".equals(g) && (Sintoma)sint.getValue()!=null){
+                try{
+                    Paciente p=new Paciente(n,Integer.parseInt(a),g.charAt(0),(Sintoma)sint.getValue());
+                    Sistema.sistema.agregarPaciente(p);
+                    window.close();
+                }catch(NumberFormatException ex){
+                    error.setVisible(true);
+                }
+                
             }else error.setVisible(true); 
              });
     }
