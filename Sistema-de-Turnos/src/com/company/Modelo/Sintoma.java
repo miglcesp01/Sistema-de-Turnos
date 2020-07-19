@@ -27,23 +27,6 @@ public class Sintoma {
         this.prioridad=prioridad;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Sintoma other = (Sintoma) obj;
-        if (!Objects.equals(this.sintoma, other.sintoma)) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {

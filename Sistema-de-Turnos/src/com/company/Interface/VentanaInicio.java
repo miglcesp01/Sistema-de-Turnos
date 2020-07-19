@@ -21,6 +21,8 @@ import javafx.scene.media.MediaView;
 import recursos.archivos.CircularSimplyLinkedList;
 import com.company.Interface.Video;
 import com.company.Modelo.Doctor;
+import com.company.Modelo.Paciente;
+import com.company.Modelo.Puesto;
 import com.company.Modelo.Puesto;
 import com.company.Modelo.Sintoma;
 import com.company.controller.Formulario;
@@ -28,6 +30,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +42,7 @@ import javafx.stage.Stage;
  */
 public class VentanaInicio {
     private BorderPane root;
+    private static TableView tablaTurnos;
     
     public VentanaInicio() {
         root = new BorderPane();
@@ -44,7 +50,7 @@ public class VentanaInicio {
         crearCentro();
         crearBajo();
         crearLeft();
-        
+        crearRight();
         
         
     }
@@ -124,9 +130,28 @@ public class VentanaInicio {
         root.setCenter(cont);
     }
     
+    private void crearRight(){
+        tablaTurnos = new TableView();
+        TableColumn<Paciente,Puesto> turno=new TableColumn<>("Turno");
+        turno.setCellValueFactory(new PropertyValueFactory<>("paciente"));
+        TableColumn<Integer,Puesto> puesto=new TableColumn<>("puesto");
+        puesto.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        tablaTurnos.getColumns().addAll(turno,puesto);
+        tablaTurnos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        root.setRight(tablaTurnos);
+        colocarPuestos();
+    }
+    
     private void crearBajo(){
         Label atencion=new Label("Horario de Atención de Lunes a Viernes de 10 a 18 hs/ Sabado");
         root.setBottom(atencion);
+    }
+    
+    public static void colocarPuestos(){
+        for(Puesto p: Sistema.sistema.getPuestos())
+            if(!p.getDisponibilida() && !tablaTurnos.getItems().contains(p)) {
+                tablaTurnos.getItems().add(p);
+            }
     }
     
     

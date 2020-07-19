@@ -1,5 +1,6 @@
 package com.company.Modelo;
 
+import com.company.Interface.VentanaInicio;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -11,13 +12,24 @@ public class Sistema {
     private PriorityQueue<Paciente> pacientes;
     private List<Puesto> puestos;
     private List<Sintoma> sintomas;
-    private int turnos=6;
+    private int turnos=1;
 
     private Sistema() {
         this.doctores = LecturaArchivos.leerArchivoDoctor();
         this.pacientes = LecturaArchivos.leerArchivoPaciente();
         this.puestos = new LinkedList<>();
         this.sintomas=LecturaArchivos.leerArchivoSintomas();
+        asignarTurnosIniciales();
+    }
+    
+    private void asignarTurnosIniciales(){
+        List<Paciente> tmp = new LinkedList<>(); 
+        while(!pacientes.isEmpty()){
+            Paciente p = pacientes.poll();
+            p.setTurno(turnos++);
+            tmp.add(p);
+        }
+        pacientes.addAll(tmp);
     }
 
     public List<Doctor> getDoctores() {
@@ -53,17 +65,23 @@ public class Sistema {
         Puesto p = new Puesto(doctor,puesto);
         puestos.add(p);
         doctor.setDisponibilidad(false);
-        if(!pacientes.isEmpty())p.setPaciente(pacientes.poll());
-        //Solo imprimo por pantalla para comprobar funcionamiento
-        System.out.println(puestos);
+        if(!pacientes.isEmpty()){
+            p.setPaciente(pacientes.poll());
+            VentanaInicio.colocarPuestos();
+        }
         return true;
     }
     
     public void agregarPaciente(Paciente p){
         if(p==null) throw new NullPointerException("Ingreso un paciente vacio");
         pacientes.offer(p);
+        
         Puesto puesto = buscarPuestoDisponible();
-        if(puesto!=null)puesto.setPaciente(pacientes.poll());
+        if(puesto!=null){
+            puesto.setPaciente(pacientes.poll());
+            VentanaInicio.colocarPuestos();
+        }
+        
     }
     public boolean eliminarPuesto(Puesto p){
         if(p!=null || puestos.contains(p)){

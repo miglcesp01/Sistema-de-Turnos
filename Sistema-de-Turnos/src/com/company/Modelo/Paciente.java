@@ -13,7 +13,7 @@ public class Paciente extends Persona{
         this.genero=genero;
         this.sintoma=sintoma;
         receta=null;
-        turno=Sistema.sistema.generarTurno();
+        //turno=Sistema.sistema.generarTurno();
     }
     
     public Paciente(String nombre, int edad,char genero,int turno,Sintoma sintoma){
@@ -60,6 +60,7 @@ public class Paciente extends Persona{
         return receta;
     }
     
+    @Override
     public String toString(){
         return nombre;
     }
