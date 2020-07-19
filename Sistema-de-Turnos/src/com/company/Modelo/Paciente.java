@@ -63,4 +63,5 @@ public class Paciente extends Persona{
     public String toString(){
         return nombre+":"+String.valueOf(turno);
     }
+    
 }

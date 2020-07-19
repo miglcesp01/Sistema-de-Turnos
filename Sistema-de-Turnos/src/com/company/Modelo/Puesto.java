@@ -42,6 +42,7 @@ public class Puesto {
         return disponibilidad;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -59,6 +60,9 @@ public class Puesto {
         }
         return true;
     }
+
+   
+    
     
     public boolean isDisponible(){
         return disponibilidad;

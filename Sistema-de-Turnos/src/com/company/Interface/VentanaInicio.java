@@ -187,6 +187,15 @@ public class VentanaInicio {
                DoctorController dc = p.getDC();
                
                dc.atenderPaciente(p.getPaciente());
+               if(!Sistema.sistema.getPacientes().isEmpty()){
+                   p.setPaciente(Sistema.sistema.getPacientes().poll());
+                
+               }
+               else{
+                   p.setDisponibilidad(true);
+               } 
+               
+                    actualizarTabla();
                window.close();
             });
             window.setScene(new Scene(v1,300,300));
@@ -223,10 +232,17 @@ public class VentanaInicio {
     }
     
     public static void colocarPuestos(){
-        for(Puesto p: Sistema.sistema.getPuestos())
-            if(!p.getDisponibilida() && !tablaTurnos.getItems().contains(p)) {
+        for(Puesto p: Sistema.sistema.getPuestos()){
+            System.out.println(tablaTurnos.getItems().contains(p));
+            if(!p.getDisponibilida() && (!tablaTurnos.getItems().contains(p))) {
                 tablaTurnos.getItems().add(p);
             }
+        }
+    }
+    
+    public static void actualizarTabla(){
+        tablaTurnos.getItems().clear();
+        colocarPuestos();
     }
     
     

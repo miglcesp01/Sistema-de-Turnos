@@ -7,6 +7,7 @@ package com.company.controller;
 
 import com.company.Modelo.Doctor;
 import com.company.Modelo.Paciente;
+import com.company.Modelo.Sistema;
 import javafx.geometry.Pos;
 import javafx.scene.Scene; 
 import javafx.scene.control.Button;
