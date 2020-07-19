@@ -112,7 +112,7 @@ public class VentanaInicio {
             List<Puesto> puestos = Sistema.sistema.getPuestos();
             List<Puesto> puestos2 = new ArrayList<>();
             for(Puesto p:puestos){
-                if(p.getPaciente()==null) puestos2.add(p);
+                if(p.getDisponibilida()) puestos2.add(p);
             }
             if(puestos2.size()>0){
                 //Creando la nueva ventana
