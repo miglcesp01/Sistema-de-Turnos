@@ -30,6 +30,6 @@ public class Sintoma {
 
     @Override
     public String toString() {
-        return sintoma+"|"+prioridad;
+        return sintoma;
     }
 }

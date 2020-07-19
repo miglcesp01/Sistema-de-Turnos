@@ -25,10 +25,17 @@ import com.company.Modelo.Paciente;
 import com.company.Modelo.Puesto;
 import com.company.Modelo.Puesto;
 import com.company.Modelo.Sintoma;
+import com.company.controller.Action;
+import com.company.controller.DoctorController;
 import com.company.controller.Formulario;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -71,57 +78,31 @@ public class VentanaInicio {
     }
     
     private void crearLeft(){
+        //Creando contenedor de los elementos del left
         VBox cont=new VBox();
+        
+        //Creando los botones de la dinamica del sistema
         Button turno=new Button("Sacar un turno");
         Button addDoc=new Button("Ingresar nuevo Doctor");
         Button crearP = new Button("Crear Puesto");
         Button eliminarP = new Button("Eliminar Puesto");
-        cont.getChildren().addAll(turno,addDoc,crearP,eliminarP);
-        cont.setSpacing(30);
+        Button atenderP = new Button("Atender Paciente");
+        
+        //Anadiendo los nodos al conteneder del left
+        cont.getChildren().addAll(turno,addDoc,crearP,eliminarP,atenderP);
+        cont.setSpacing(10);
+        
+        //Anadiendo las acciones de los botones
         turno.setOnMouseClicked(e -> {Formulario.crearFormularioPaciente();});
         addDoc.setOnMouseClicked(e -> {Formulario.crearFormularioDoctor();});
-        crearP.setOnMouseClicked(e->{
-            System.out.println(Sistema.sistema.getPuestos().size());
-            Doctor doctor = Sistema.sistema.buscarDoctorDisponible();
-            if(doctor!=null)Sistema.sistema.generarPuesto(doctor, Sistema.sistema.getPuestos().size()+1);  
-        });
-        eliminarP.setOnMouseClicked(e->{
-            //Creando la nueva ventana
-            Stage window = new Stage();
-            window.setTitle("Eliminar Puesto");
-            window.setMinHeight(500);
-            window.setMinWidth(500);
-            //Creando el comboBox de los puestos que existen
-            ObservableList<Puesto> puestos= FXCollections.observableList(Sistema.sistema.getPuestos());
-            ComboBox comboPuestos=new ComboBox(puestos);
-            //Creando el boton para elimianr los puestos
-            Button eliminar = new Button("Eliminar Puesto");
-            //Creando el contenedor de la venana Eliminar Puesto
-            VBox root = new VBox();
-            HBox layout = new HBox();
-            layout.getChildren().addAll(comboPuestos,eliminar);
-            root.getChildren().add(layout);
-            Scene scene = new Scene(root,200,200);
-            window.setScene(scene);
-            window.show();
-            
-            //Accion del elemento eliminar
-            eliminar.setOnMouseClicked(e1->{
-                Puesto p = (Puesto) comboPuestos.getValue();
-                if(p!=null){
-                    Sistema.sistema.eliminarPuesto(p);
-                    window.close();  
-                }
-                else{
-                    Label lbl = new Label("No se ha escogido un Puesto");
-                    HBox H2 = new HBox(lbl);
-                    H2.setAlignment(Pos.CENTER);
-                    root.getChildren().add(H2);
-                }
-            });
-        });
-        root.setLeft(cont);
+        crearP.setOnMouseClicked(e->{ Action.crearPuesto();});
+        eliminarP.setOnMouseClicked(e->{ Action.eliminarPuesto(); });
         
+        atenderP.setOnMouseClicked(e->{ Action.atenderPaciente(); });
+        
+        //Anadiendo el conetenedor al root principal
+        root.setLeft(cont);
+    
     }
     
     private void crearCentro(){
@@ -136,6 +117,7 @@ public class VentanaInicio {
         turno.setCellValueFactory(new PropertyValueFactory<>("paciente"));
         TableColumn<Integer,Puesto> puesto=new TableColumn<>("puesto");
         puesto.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        tablaTurnos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tablaTurnos.getColumns().addAll(turno,puesto);
         tablaTurnos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         root.setRight(tablaTurnos);
@@ -148,12 +130,18 @@ public class VentanaInicio {
     }
     
     public static void colocarPuestos(){
-        for(Puesto p: Sistema.sistema.getPuestos())
-            if(!p.getDisponibilida() && !tablaTurnos.getItems().contains(p)) {
+        for(Puesto p: Sistema.sistema.getPuestos()){
+            System.out.println(tablaTurnos.getItems().contains(p));
+            if(!p.isDisponible() && (!tablaTurnos.getItems().contains(p))) {
                 tablaTurnos.getItems().add(p);
             }
+        }
     }
     
+    public static void actualizarTabla(){
+        tablaTurnos.getItems().clear();
+        colocarPuestos();
+    }
     
 
     private class Time implements Runnable {
@@ -188,5 +176,6 @@ public class VentanaInicio {
 
     }
 
+   
     
 }

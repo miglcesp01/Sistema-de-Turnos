@@ -1,15 +1,16 @@
 package com.company.Modelo;
 
+import com.company.controller.DoctorController;
 import java.util.Objects;
 
 public class Puesto {
     private Paciente paciente;
-    private Doctor doctor;
+    private DoctorController doctor;
     private int numero;
     private boolean disponibilidad;
 
     public Puesto(Doctor doctor,int numero){
-        this.doctor=doctor; 
+        this.doctor=new DoctorController(doctor,this); 
         this.numero=numero;
         disponibilidad=true;
     }
@@ -17,8 +18,13 @@ public class Puesto {
         return paciente;
     }
     public Doctor getDoctor(){
+        return doctor.getDoctor();
+    }
+    
+    public DoctorController getDC(){
         return doctor;
     }
+    
     public int getNumero(){
         return numero;
     }
@@ -32,9 +38,11 @@ public class Puesto {
         this.disponibilidad=dis;
     }
     
-    public boolean getDisponibilida(){
-        return disponibilidad;
+    public void atencion(){
+        if(paciente!=null)
+            doctor.atenderPaciente(paciente);
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -53,6 +61,9 @@ public class Puesto {
         }
         return true;
     }
+
+   
+    
     
     public boolean isDisponible(){
         return disponibilidad;
@@ -60,8 +71,7 @@ public class Puesto {
 
     @Override
     public String toString() {
-        if(paciente==null) return"Puesto{" + "paciente= Ninguno" + ", doctor=" + doctor + ", numero=" + numero + ", disponibilidad=" + disponibilidad + '}';
-        return "Puesto{" + "paciente=" + paciente.getNombre() + ", doctor=" + doctor + ", numero=" + numero + ", disponibilidad=" + disponibilidad + '}';
+        return String.valueOf(numero);
     }
 
 }

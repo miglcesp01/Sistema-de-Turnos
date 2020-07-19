@@ -49,7 +49,7 @@ public class Formulario {
         layout.setSpacing(20);
         layout.getChildren().addAll(name,age,gender,syntomy,ok,error);
         layout.setAlignment(Pos.CENTER);
-        Stage window=generarScene(layout, "Sacar Turno");
+        Stage window=Action.generarScene(layout, "Sacar Turno");
         window.show();
         ok.setOnMouseClicked(e -> { 
             String n=obtenerTexto(name);
@@ -72,7 +72,7 @@ public class Formulario {
         layout.setSpacing(20);
         layout.getChildren().addAll(name,esp,id,ok);
         layout.setAlignment(Pos.CENTER);
-        Stage window = generarScene(layout, "Crear Doctor");
+        Stage window = Action.generarScene(layout, "Crear Doctor");
         window.show();
         ok.setOnMouseClicked(e -> { 
             String n=obtenerTexto(name);
@@ -85,15 +85,6 @@ public class Formulario {
              });
     }
     
-    private static Stage generarScene(Node root,String titulo){
-        Stage window = new Stage();
-        window.setTitle(titulo);
-        window.setMinHeight(400);
-        window.setMinWidth(400);
-        Scene scene = new Scene((Parent)root,200,200);
-        window.setScene(scene);
-        return window;
-    }
     
     
     private static HBox txField(String texto){

@@ -6,8 +6,6 @@
 
 package com.company.Interface;
 
-import static com.company.Interface.pruebaVideos.mediaPlayer;
-import static com.company.Interface.pruebaVideos.mediaView;
 import java.io.File;
 import java.util.Iterator;
 import javafx.scene.layout.VBox;

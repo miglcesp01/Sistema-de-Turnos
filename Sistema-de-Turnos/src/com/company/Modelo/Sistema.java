@@ -1,6 +1,7 @@
 package com.company.Modelo;
 
 import com.company.Interface.VentanaInicio;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -13,6 +14,7 @@ public class Sistema {
     private List<Puesto> puestos;
     private List<Sintoma> sintomas;
     private int turnos=1;
+    private int numeroPuestos = 1;
 
     private Sistema() {
         this.doctores = LecturaArchivos.leerArchivoDoctor();
@@ -61,8 +63,8 @@ public class Sistema {
         return true;
     }
     
-    public boolean generarPuesto(Doctor doctor, int puesto){
-        Puesto p = new Puesto(doctor,puesto);
+    public boolean generarPuesto(Doctor doctor){
+        Puesto p = new Puesto(doctor,numeroPuestos++);
         puestos.add(p);
         doctor.setDisponibilidad(false);
         if(!pacientes.isEmpty()){
@@ -75,7 +77,7 @@ public class Sistema {
     public void agregarPaciente(Paciente p){
         if(p==null) throw new NullPointerException("Ingreso un paciente vacio");
         pacientes.offer(p);
-        
+        p.setTurno(generarTurno());
         Puesto puesto = buscarPuestoDisponible();
         if(puesto!=null){
             puesto.setPaciente(pacientes.poll());
@@ -106,4 +108,18 @@ public class Sistema {
             if(p.isDisponible()) return p;
         }return null;
     }
+    
+    public List<Puesto> puestosDisponible(){
+        List<Puesto> disponibles=new ArrayList<>();
+        for(Puesto p: puestos)
+            if(p.isDisponible()) disponibles.add(p);
+        return disponibles;
+    }
+    
+    public List<Puesto> puestosOcupados(){
+        List<Puesto> disponibles=new ArrayList<>();
+        for(Puesto p: puestos)
+            if(!p.isDisponible()) disponibles.add(p);
+        return disponibles;
+        }
 }
