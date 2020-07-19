@@ -52,7 +52,7 @@ public class DoctorController {
         ok.setOnMouseClicked(e -> {
             generarReceta(txRec.getText());
             window.close();
-        });
+        }); 
         window.setOnCloseRequest(e -> {
             Action.eliminarStage(puesto);
         });
