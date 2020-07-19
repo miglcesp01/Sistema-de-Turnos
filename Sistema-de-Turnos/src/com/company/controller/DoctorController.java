@@ -37,10 +37,6 @@ public class DoctorController {
     }
 
     public void atenderPaciente(Paciente pac) {
-        Stage window = new Stage();
-        window.setTitle("Atender paciente");
-        window.setMinHeight(300);
-        window.setMinWidth(300);
         VBox root = new VBox();
         Label pre = new Label("Bienvenido Paciente " + pac.getNombre() + " ¿Qué sintomas presenta?");
         Label sint = new Label("\n Entiendo, presenta " + pac.getSintoma().getSintoma());
@@ -49,35 +45,27 @@ public class DoctorController {
         Label rec = new Label("\n Le voy a recetar:");
         TextField txRec = new TextField();
         Button ok = new Button("ok");
+        pac.setReceta(txRec.getText());
+        root.getChildren().addAll(pre, sint, diag, txDiag, rec, txRec, ok);
+        Stage window = Action.generarScene(root, "Receta");
+        window.show();
         ok.setOnMouseClicked(e -> {
             generarReceta(txRec.getText());
             window.close();
         });
-        pac.setReceta(txRec.getText());
-        root.getChildren().addAll(pre, sint, diag, txDiag, rec, txRec, ok);
-
-        Scene scene = new Scene(root, 350, 350);
-        window.setScene(scene);
-        window.show();
         window.setOnCloseRequest(e -> {
             Action.eliminarStage(puesto);
         });
     }
 
     private void generarReceta(String receta) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Receta");
-        window.setMinHeight(200);
-        window.setMinWidth(400);
         Label rece = new Label("Necesita comprar: \n" + receta);
         Button ok = new Button("Ok");
         VBox layout = new VBox();
         layout.setSpacing(20);
         layout.getChildren().addAll(rece, ok);
         layout.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout, 200, 200);
-        window.setScene(scene);
+        Stage window = Action.generarScene(layout, "Receta");
         window.show();
         ok.setOnMouseClicked(e -> {
             window.close();
@@ -91,9 +79,11 @@ public class DoctorController {
     }
 
     private void llamarPaciente() {
-        if (!Sistema.sistema.getPacientes().isEmpty())  puesto.setPaciente(Sistema.sistema.getPacientes().poll());
-        
-        else puesto.setDisponibilidad(true);
+        if (!Sistema.sistema.getPacientes().isEmpty()) {
+            puesto.setPaciente(Sistema.sistema.getPacientes().poll());
+        } else {
+            puesto.setDisponibilidad(true);
+        }
         actualizarTabla();
     }
 
