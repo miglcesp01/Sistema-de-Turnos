@@ -28,6 +28,7 @@ import com.company.Modelo.Sintoma;
 import com.company.controller.DoctorController;
 import com.company.controller.Formulario;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,6 +49,7 @@ import javafx.stage.Stage;
 public class VentanaInicio {
     private BorderPane root;
     private static TableView tablaTurnos;
+    private static List<DoctorController> pacientesAtendiendose = new LinkedList<>();
     
     public VentanaInicio() {
         root = new BorderPane();
@@ -185,17 +187,10 @@ public class VentanaInicio {
             atender.setOnMouseClicked(e1->{
                Puesto p = (Puesto)comboPuestos.getValue();
                DoctorController dc = p.getDC();
-               
-               dc.atenderPaciente(p.getPaciente());
-               if(!Sistema.sistema.getPacientes().isEmpty()){
-                   p.setPaciente(Sistema.sistema.getPacientes().poll());
-                
+               if(!pacientesAtendiendose.contains(dc)){dc.atenderPaciente(p.getPaciente());
+                pacientesAtendiendose.add(dc);
                }
-               else{
-                   p.setDisponibilidad(true);
-               } 
                
-                    actualizarTabla();
                window.close();
             });
             window.setScene(new Scene(v1,300,300));
@@ -244,7 +239,9 @@ public class VentanaInicio {
         tablaTurnos.getItems().clear();
         colocarPuestos();
     }
-    
+    public static void eliminarStage(DoctorController stage){
+       pacientesAtendiendose.remove(stage);
+    } 
     
 
     private class Time implements Runnable {
@@ -279,5 +276,6 @@ public class VentanaInicio {
 
     }
 
+   
     
 }

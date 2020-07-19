@@ -10,7 +10,7 @@ public class Puesto {
     private boolean disponibilidad;
 
     public Puesto(Doctor doctor,int numero){
-        this.doctor=new DoctorController(doctor); 
+        this.doctor=new DoctorController(doctor,this); 
         this.numero=numero;
         disponibilidad=true;
     }

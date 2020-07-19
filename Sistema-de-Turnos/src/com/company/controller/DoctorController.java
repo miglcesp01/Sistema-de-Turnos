@@ -5,9 +5,13 @@
  */
 package com.company.controller;
 
+import com.company.Interface.VentanaInicio;
+import static com.company.Interface.VentanaInicio.actualizarTabla;
 import com.company.Modelo.Doctor;
 import com.company.Modelo.Paciente;
+import com.company.Modelo.Puesto;
 import com.company.Modelo.Sistema;
+import java.util.Objects;
 import javafx.geometry.Pos;
 import javafx.scene.Scene; 
 import javafx.scene.control.Button;
@@ -24,9 +28,11 @@ import javafx.stage.Stage;
  */
 public class DoctorController {
     private Doctor operador;
+    private Puesto puesto;
     
-    public DoctorController(Doctor doc){
+    public DoctorController(Doctor doc,Puesto puesto){
         operador=doc;
+        this.puesto = puesto;
     }
     
     public void atenderPaciente(Paciente pac){
@@ -53,6 +59,9 @@ public class DoctorController {
         Scene scene = new Scene(root,350,350);
         window.setScene(scene);
         window.show();
+        window.setOnCloseRequest(e->{
+            VentanaInicio.eliminarStage(this);
+        });
     }
     
     private void generarReceta(String receta){
@@ -70,12 +79,51 @@ public class DoctorController {
         Scene scene = new Scene(layout,200,200);
         window.setScene(scene);
         window.show();
-        ok.setOnMouseClicked(e -> { window.close(); });
-        
+        ok.setOnMouseClicked(e -> { window.close();
+        llamarPaciente(); 
+        VentanaInicio.eliminarStage(this);
+        });
     }
     
     public Doctor getDoctor(){
         return this.operador;
+    }
+    
+    
+    
+    private void llamarPaciente(){
+        if(!Sistema.sistema.getPacientes().isEmpty()){
+                   puesto.setPaciente(Sistema.sistema.getPacientes().poll());
+                
+               }
+               else{
+                   puesto.setDisponibilidad(true);
+               } 
+               
+                    actualizarTabla();
+    }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DoctorController other = (DoctorController) obj;
+        if (!Objects.equals(this.operador, other.operador)) {
+            return false;
+        }
+        if (!Objects.equals(this.puesto, other.puesto)) {
+            return false;
+        }
+        return true;
     }
     
     
