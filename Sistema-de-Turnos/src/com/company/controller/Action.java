@@ -5,6 +5,7 @@
  */
 package com.company.controller;
 
+import com.company.Interface.VentanaInicio;
 import com.company.Modelo.Doctor;
 import com.company.Modelo.Paciente;
 import com.company.Modelo.Puesto;
@@ -146,5 +147,6 @@ public class Action {
     
     public static void eliminarStage(Puesto puesto){
        puestosEnAtencion.remove(puesto);
+        VentanaInicio.actualizarTabla();
     } 
 }
