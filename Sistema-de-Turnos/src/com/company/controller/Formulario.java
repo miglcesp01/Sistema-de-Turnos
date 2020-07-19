@@ -82,10 +82,12 @@ public class Formulario {
         HBox esp = txField("Ingrese su especialidad: ");
         HBox id = txField("Igrese su identificación: ");
         Button ok = new Button("Crear Doctor");
+        Label error = new Label("Ingreso algun valor erroneo");
+        error.setVisible(false);
         VBox layout = new VBox();
         layout.setAlignment(Pos.CENTER);
         layout.setSpacing(5);
-        layout.getChildren().addAll(name, esp, id, ok);
+        layout.getChildren().addAll(name, esp, id, ok,error);
         layout.setStyle("-fx-background-image: url(recursos/archivos/images/formularios.jpg);");
         Stage window = Action.generarScene(layout, "Crear Doctor");
         window.show();
@@ -93,7 +95,7 @@ public class Formulario {
             String n = obtenerTexto(name);
             String es = obtenerTexto(esp);
             String i = obtenerTexto(id);
-            if (n != null && es != null && i != null) {
+            if (!"".equals(n) && !"".equals(es) && !"".equals(i)) {
                 Sistema.sistema.agregarDoctor(new Doctor(n, es, i));
                 window.close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -101,7 +103,7 @@ public class Formulario {
                 alert.setHeaderText("Ha sido ingresado al sistema del hospital: DR." + n);
                 alert.show();
             } else {
-                layout.getChildren().add(new Label("Ingreso algun valor erroneo"));
+                error.setVisible(true);
             }
         });
     }
