@@ -116,7 +116,6 @@ public class VentanaInicio {
         eliminarP.setOnMouseClicked(e->{ Action.eliminarPuesto(); });
         
         atenderP.setOnMouseClicked(e->{ Action.atenderPaciente(); });
-        
         //Anadiendo el conetenedor al root principal
         root.setLeft(cont);
     
@@ -149,6 +148,7 @@ public class VentanaInicio {
         Label atencion=new Label("Horario de Atención de Lunes a Viernes de 10 a 18 hrs/ Sábado");
         atencion.setStyle("-fx-text-fill:white;"
                 + "-fx-font-size:20px");
+        root.setAlignment(atencion, Pos.CENTER);
         root.setBottom(atencion);
     }
     
