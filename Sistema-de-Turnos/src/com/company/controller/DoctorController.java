@@ -13,6 +13,7 @@ import com.company.Modelo.Puesto;
 import com.company.Modelo.Sistema;
 import java.util.Objects;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,6 +48,7 @@ public class DoctorController {
         Button ok = new Button("ok");
         pac.setReceta(txRec.getText());
         root.getChildren().addAll(pre, sint, diag, txDiag, rec, txRec, ok);
+        root.setStyle("-fx-background-image: url(recursos/archivos/images/formularios.jpg);");
         Stage window = Action.generarScene(root, "Receta");
         window.show();
         ok.setOnMouseClicked(e -> {
@@ -65,7 +67,13 @@ public class DoctorController {
         layout.setSpacing(20);
         layout.getChildren().addAll(rece, ok);
         layout.setAlignment(Pos.CENTER);
-        Stage window = Action.generarScene(layout, "Receta");
+        layout.setStyle("-fx-background-image: url(recursos/archivos/images/imagenReceta.jpg);");
+        Stage window = new Stage();
+        window.setTitle("Generar Receta");
+        window.setMinHeight(500);
+        window.setMinWidth(333);
+        Scene scene = new Scene((Parent)layout,500,333);
+        window.setScene(scene);
         window.show();
         ok.setOnMouseClicked(e -> {
             window.close();

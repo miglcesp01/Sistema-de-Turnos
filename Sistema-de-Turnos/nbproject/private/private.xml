@@ -3,25 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Interface/VentanaInicio.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Modelo/Sintoma.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/controller/Formulario.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Modelo/Puesto.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Interface/pruebaVideos.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Modelo/Paciente.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Main/SistemaDeTurnos.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Modelo/Doctor.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Modelo/Sistema.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/recursos/archivos/LecturaArchivos.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/controller/DoctorController.java</file>
-            <file>file:/C:/Users/Alexis/Desktop/PROYECTOS/Sistema-de-Turnos/Sistema-de-Turnos/src/recursos/archivos/pacientes.txt</file>
-=======
-            <file>file:/C:/Users/danny/OneDrive/Escritorio/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Interface/VentanaInicio.java</file>
-            <file>file:/C:/Users/danny/OneDrive/Escritorio/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/controller/DoctorController.java</file>
-            <file>file:/C:/Users/danny/OneDrive/Escritorio/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Main/SistemaDeTurnos.java</file>
-            <file>file:/C:/Users/danny/OneDrive/Escritorio/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Modelo/Sistema.java</file>
->>>>>>> 35d2675b951d27699dbf3e64eeb38b311707d67f
+            <file>file:/F:/Estructuras%20de%20Datos/Proyecto1P/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Interface/VentanaInicio.java</file>
+            <file>file:/F:/Estructuras%20de%20Datos/Proyecto1P/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/controller/Formulario.java</file>
+            <file>file:/F:/Estructuras%20de%20Datos/Proyecto1P/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/controller/Action.java</file>
+            <file>file:/F:/Estructuras%20de%20Datos/Proyecto1P/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Main/SistemaDeTurnos.java</file>
+            <file>file:/F:/Estructuras%20de%20Datos/Proyecto1P/Sistema-de-Turnos/Sistema-de-Turnos/src/recursos/archivos/CSS/stylesheetPrincipal.css</file>
+            <file>file:/F:/Estructuras%20de%20Datos/Proyecto1P/Sistema-de-Turnos/Sistema-de-Turnos/src/com/company/Interface/Video.java</file>
         </group>
     </open-files>
 </project-private>
