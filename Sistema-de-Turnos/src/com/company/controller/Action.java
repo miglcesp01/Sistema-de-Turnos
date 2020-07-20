@@ -5,6 +5,7 @@
  */
 package com.company.controller;
 
+import com.company.Interface.VentanaInicio;
 import com.company.Modelo.Doctor;
 import com.company.Modelo.Paciente;
 import com.company.Modelo.Puesto;
@@ -55,6 +56,7 @@ public class Action {
                 //Creando el comboBox de los puestos que existen
                 ObservableList<Puesto> puestosOL= FXCollections.observableList(pustDisp);
                 ComboBox comboPuestos=new ComboBox(puestosOL);
+                comboPuestos.getSelectionModel().selectFirst();
                 //Creando el boton para elimianr los puestos
                 Button eliminar = new Button("Eliminar Puesto");
                 //Creando el contenedor de la venana Eliminar Puesto
@@ -112,6 +114,7 @@ public class Action {
             if(puestos.size()>0){
                 ObservableList<Puesto> puestosOL= FXCollections.observableList(puestos);
                 ComboBox comboPuestos=new ComboBox(puestosOL);
+                comboPuestos.getSelectionModel().selectFirst();
                 Button atender = new Button("Atender paciente");
                 VBox v1 = new VBox();
                 v1.setAlignment(Pos.CENTER);
@@ -146,5 +149,6 @@ public class Action {
     
     public static void eliminarStage(Puesto puesto){
        puestosEnAtencion.remove(puesto);
+        VentanaInicio.actualizarTabla();
     } 
 }
