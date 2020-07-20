@@ -42,27 +42,27 @@ public class DoctorController {
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
         Label pre = new Label("Bienvenido Paciente " + pac.getNombre() + " ¿Qué sintomas presenta?");
+        pre.setStyle("-fx-font-weight:BOLD;-fx-font-size: 16;");
         Label sint = new Label("\n Entiendo, presenta " + pac.getSintoma().getSintoma());
+        sint.setStyle("-fx-font-weight:BOLD;-fx-font-size: 16;");
         HBox s=new HBox();
         Label diag = new Label("Según mi experiencia, podría ser:  ");
+        diag.setStyle("-fx-font-weight:BOLD;-fx-font-size: 16;");
         Label espa2=new Label("\n");
         TextField txDiag = new TextField();
         s.setAlignment(Pos.CENTER);
         s.getChildren().addAll(diag,txDiag);
         Label espa=new Label("\n");
         Label rec = new Label("Le voy a recetar:  ");
+        rec.setStyle("-fx-font-weight:BOLD;-fx-font-size: 16;");
         TextField txRec = new TextField();
         HBox r=new HBox();
         r.setAlignment(Pos.CENTER);
         r.getChildren().addAll(rec,txRec);
         Button ok = new Button("ok");
         pac.setReceta(txRec.getText());
-<<<<<<< HEAD
-        root.getChildren().addAll(pre, sint, diag, txDiag, rec, txRec, ok);
         root.setStyle("-fx-background-image: url(recursos/archivos/images/formularios.jpg);");
-=======
         root.getChildren().addAll(pre, sint,espa2, s,espa, r, ok);
->>>>>>> fa32a9256a668eb0e8bb66dcbd0aca6b4fd4915b
         Stage window = Action.generarScene(root, "Receta");
         window.show();
         ok.setOnMouseClicked(e -> {
@@ -76,6 +76,7 @@ public class DoctorController {
 
     private void generarReceta(String receta) {
         Label rece = new Label("Necesita comprar: \n" + receta);
+        rece.setStyle("-fx-font-size: 24;-fx-text-fill: white;");
         Button ok = new Button("Ok");
         VBox layout = new VBox();
         layout.setSpacing(20);
