@@ -17,8 +17,10 @@ public class Sistema {
     private int numeroPuestos = 1;
 
     private Sistema() {
-        this.doctores = LecturaArchivos.leerArchivoDoctor();
-        this.pacientes = LecturaArchivos.leerArchivoPaciente();
+        //this.doctores = LecturaArchivos.leerArchivoDoctor();
+        this.doctores = new LinkedList<>();
+        //this.pacientes = LecturaArchivos.leerArchivoPaciente();
+        this.pacientes = new PriorityQueue<>((Paciente p1, Paciente p2)-> p1.getSintoma().getPrioridad()-p2.getSintoma().getPrioridad());
         this.puestos = new LinkedList<>();
         this.sintomas=LecturaArchivos.leerArchivoSintomas();
         asignarTurnosIniciales();
