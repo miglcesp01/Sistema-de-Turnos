@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -38,15 +39,24 @@ public class DoctorController {
 
     public void atenderPaciente(Paciente pac) {
         VBox root = new VBox();
+        root.setAlignment(Pos.CENTER);
         Label pre = new Label("Bienvenido Paciente " + pac.getNombre() + " ¿Qué sintomas presenta?");
         Label sint = new Label("\n Entiendo, presenta " + pac.getSintoma().getSintoma());
-        Label diag = new Label("Según mi experiencia, podría ser:");
+        HBox s=new HBox();
+        Label diag = new Label("Según mi experiencia, podría ser:  ");
+        Label espa2=new Label("\n");
         TextField txDiag = new TextField();
-        Label rec = new Label("\n Le voy a recetar:");
+        s.setAlignment(Pos.CENTER);
+        s.getChildren().addAll(diag,txDiag);
+        Label espa=new Label("\n");
+        Label rec = new Label("Le voy a recetar:  ");
         TextField txRec = new TextField();
+        HBox r=new HBox();
+        r.setAlignment(Pos.CENTER);
+        r.getChildren().addAll(rec,txRec);
         Button ok = new Button("ok");
         pac.setReceta(txRec.getText());
-        root.getChildren().addAll(pre, sint, diag, txDiag, rec, txRec, ok);
+        root.getChildren().addAll(pre, sint,espa2, s,espa, r, ok);
         Stage window = Action.generarScene(root, "Receta");
         window.show();
         ok.setOnMouseClicked(e -> {

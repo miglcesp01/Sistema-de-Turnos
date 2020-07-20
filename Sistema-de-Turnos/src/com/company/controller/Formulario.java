@@ -40,6 +40,7 @@ public class Formulario {
         HBox gender = txField("Igrese su genero(M o F): ");
         ObservableList<Sintoma> sintomas = FXCollections.observableList(Sistema.sistema.getSintomas());
         ComboBox sint = new ComboBox(sintomas);
+        sint.getSelectionModel().selectFirst();
         Region espacio = new Region();
         HBox syntomy = new HBox(new Label("ELija su sintoma"), espacio, sint);
         HBox.setHgrow(espacio, Priority.ALWAYS);
